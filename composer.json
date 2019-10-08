@@ -1,0 +1,56 @@
+{
+  "name": "spaceonfire/simple-php-apidoc",
+  "type": "library",
+  "description": "Simple documentation generator for API or your PHP library",
+  "keywords": [
+    "phpdoc",
+    "apidoc",
+    "markdown"
+  ],
+  "homepage": "https://github.com/spaceonfire/simple-php-apidoc",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "~7.2",
+    "nikic/php-parser": "^4.0",
+    "phpdocumentor/reflection": "^4.0.0-beta",
+    "phpdocumentor/reflection-docblock": "^5.0.0-alpha5",
+    "symfony/console": "^4.3.5",
+    "symfony/filesystem": "^4.3.5",
+    "symfony/finder": "^4.3.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=7.0",
+    "squizlabs/php_codesniffer": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\SimplePhpApiDoc\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\SimplePhpApiDoc\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "check-style": "phpcs src tests",
+    "fix-style": "phpcbf src tests"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
