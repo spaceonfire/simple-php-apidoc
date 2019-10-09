@@ -19,6 +19,7 @@
   ],
   "require": {
     "php": "~7.2",
+    "ext-json": "*",
     "nikic/php-parser": "^4.0",
     "phpdocumentor/reflection": "^4.0.0-beta",
     "phpdocumentor/reflection-docblock": "^5.0.0-alpha5",
@@ -40,6 +41,9 @@
       "spaceonfire\\SimplePhpApiDoc\\": "tests"
     }
   },
+  "bin": [
+    "bin/apidoc"
+  ],
   "scripts": {
     "test": "phpunit",
     "check-style": "phpcs src tests",

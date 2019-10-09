@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+use spaceonfire\SimplePhpApiDoc\GeneratorCommand;
+use Symfony\Component\Console\Application;
+
+function findProjectRoot($dir = __DIR__)
+{
+    static $explored = [];
+
+    if (in_array($dir, $explored, true)) {
+        try {
+            throw new RuntimeException('Cannot find composer installation');
+        } catch (Throwable $throwable) {
+            echo implode(PHP_EOL, [
+                $throwable->getMessage(),
+                $throwable->getTraceAsString()
+            ]);
+            exit(1);
+        }
+    }
+
+    $explored[] = $dir;
+
+    if (file_exists($fileName = $dir . '/vendor/autoload.php')) {
+        return $dir;
+    }
+
+    return findProjectRoot(dirname($dir));
+}
+
+$root = findProjectRoot();
+
+require $root . '/vendor/autoload.php';
+
+$composer = json_decode(file_get_contents($root . '/composer.json'), true);
+
+$application = new Application();
+$command = $application->add(new GeneratorCommand($composer));
+$application->setDefaultCommand($command->getName(), true);
+$application->run();
