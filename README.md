@@ -1,39 +1,32 @@
-# simple-php-apidoc
+# Simple PHP ApiDoc
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+Simple API documentation generator for your PHP library.
 
 ## Structure
 
-If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
-
 ```
-bin/
-build/
-docs/
-config/
-src/
-tests/
-vendor/
+bin/          Package binaries
+docs/         API documentation
+src/          Source code
+tests/        Unit tests
 ```
 
 ## Install
 
 Via Composer
 
-``` bash
+```bash
 $ composer require spaceonfire/simple-php-apidoc
 ```
 
 ## Usage
 
-``` php
-$skeleton = new spaceonfire\SimplePhpApiDoc();
-echo $skeleton->echoPhrase('Hello, League!');
+```bash
+./vendor/bin/apidoc --help
 ```
 
 ## Change log
@@ -42,7 +35,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 
