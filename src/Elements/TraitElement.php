@@ -11,6 +11,7 @@ use phpDocumentor\Reflection\Php\Trait_;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\Collections\MethodsCollection;
 use spaceonfire\SimplePhpApiDoc\Elements\Collections\PropertiesCollection;
+use spaceonfire\SimplePhpApiDoc\Elements\Collections\TraitsCollection;
 
 class TraitElement extends BaseElement implements ElementDecoratorInterface, MethodOwnerInterface, PropertyOwnerInterface
 {
@@ -26,6 +27,10 @@ class TraitElement extends BaseElement implements ElementDecoratorInterface, Met
      * @var PropertiesCollection
      */
     protected $properties;
+    /**
+     * @var TraitsCollection
+     */
+    protected $traits;
 
     /**
      * TraitElement constructor.
@@ -66,6 +71,12 @@ class TraitElement extends BaseElement implements ElementDecoratorInterface, Met
             $this->methods = new MethodsCollection(array_map(function ($prop) {
                 return $this->context->elementFactory($prop)->setOwner($this);
             }, $this->proxy(__FUNCTION__, func_get_args())));
+
+            $this->methods = $this->methods->merge(
+                $this->getUsedTraits()->getMethods()->map(function (MethodElement $method) {
+                    return (clone $method)->setOwner($this);
+                })
+            );
         }
 
         return $this->methods;
@@ -78,8 +89,14 @@ class TraitElement extends BaseElement implements ElementDecoratorInterface, Met
     {
         if ($this->properties === null) {
             $this->properties = new PropertiesCollection(array_map(function ($prop) {
-                return $this->context->elementFactory($prop);
+                return $this->context->elementFactory($prop)->setOwner($this);
             }, $this->proxy(__FUNCTION__, func_get_args())));
+
+            $this->properties = $this->properties->merge(
+                $this->getUsedTraits()->getProperties()->map(function (PropertyElement $prop) {
+                    return (clone $prop)->setOwner($this);
+                })
+            );
         }
 
         return $this->properties;
@@ -107,12 +124,26 @@ class TraitElement extends BaseElement implements ElementDecoratorInterface, Met
     }
 
     /**
+     * @return TraitsCollection
+     */
+    public function getUsedTraits(): TraitsCollection
+    {
+        if ($this->traits === null) {
+            $this->traits = new TraitsCollection(array_map(function (Fqsen $traitName) {
+                return $this->getContext()->getElement((string)$traitName);
+            }, $this->getUsedTraitsFqsen()));
+        }
+
+        return $this->traits;
+    }
+
+    /**
      * Returns fqsen of all traits used by this trait.
      * @return Fqsen[]
      */
-    public function getUsedTraits(): array
+    public function getUsedTraitsFqsen(): array
     {
-        return $this->proxy(__FUNCTION__, func_get_args());
+        return $this->proxy('getUsedTraits', func_get_args());
     }
 
     public function getLocation(): Location

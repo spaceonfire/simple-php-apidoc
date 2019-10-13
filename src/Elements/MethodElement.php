@@ -11,7 +11,7 @@ use phpDocumentor\Reflection\Php\Method;
 use phpDocumentor\Reflection\Php\Visibility;
 use phpDocumentor\Reflection\Type;
 use spaceonfire\SimplePhpApiDoc\Context;
-use spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver\MethodsDocBlockResolver;
+use spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver\MethodDocBlockResolver;
 
 class MethodElement extends BaseElement implements ElementDecoratorInterface, ElementVisibilityInterface
 {
@@ -154,7 +154,7 @@ class MethodElement extends BaseElement implements ElementDecoratorInterface, El
                 return null;
             }
 
-            $this->docBlock = (new MethodsDocBlockResolver($docBlock, $this))->resolve();
+            $this->docBlock = (new MethodDocBlockResolver($docBlock, $this))->resolve();
         }
 
         return $this->docBlock;

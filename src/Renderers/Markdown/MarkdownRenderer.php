@@ -8,6 +8,7 @@ use phpDocumentor\Reflection\Fqsen;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
 use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
+use spaceonfire\SimplePhpApiDoc\Elements\TraitElement;
 use spaceonfire\SimplePhpApiDoc\Renderers\BaseRenderer;
 use Throwable;
 
@@ -53,5 +54,14 @@ class MarkdownRenderer extends BaseRenderer
     public function renderClasses(ClassElement $class): string
     {
         return $this->renderFile('class.php', compact('class'));
+    }
+
+    /**
+     * {@inheritDoc}
+     * @throws Throwable
+     */
+    public function renderTraits(TraitElement $trait): string
+    {
+        return $this->renderFile('trait.php', compact('trait'));
     }
 }

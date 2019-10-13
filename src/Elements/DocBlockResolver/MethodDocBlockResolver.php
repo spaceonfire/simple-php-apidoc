@@ -9,13 +9,13 @@ use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
 use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
 use spaceonfire\SimplePhpApiDoc\Elements\MethodElement;
 
-class MethodsDocBlockResolver extends BaseDocBlockResolver
+/**
+ * Class MethodDocBlockResolver
+ * @package spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver
+ * @link https://docs.phpdoc.org/guides/inheritance.html#methods
+ */
+class MethodDocBlockResolver extends BaseDocBlockResolver
 {
-    /**
-     * @var MethodElement
-     */
-    protected $method;
-
     protected static $inheritedTags = [
         'author',
         'copyright',
@@ -24,6 +24,11 @@ class MethodsDocBlockResolver extends BaseDocBlockResolver
         'return',
         'throws',
     ];
+
+    /**
+     * @var MethodElement
+     */
+    protected $method;
 
     /**
      * MethodsDocBlockResolver constructor.
@@ -49,7 +54,7 @@ class MethodsDocBlockResolver extends BaseDocBlockResolver
      * @param MethodElement $method
      * @return static
      */
-    public function setMethod(MethodElement $method): MethodsDocBlockResolver
+    public function setMethod(MethodElement $method): MethodDocBlockResolver
     {
         $this->method = $method;
         return $this;

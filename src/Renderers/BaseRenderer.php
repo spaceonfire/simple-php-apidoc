@@ -9,6 +9,7 @@ use RuntimeException;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
 use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
+use spaceonfire\SimplePhpApiDoc\Elements\TraitElement;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -158,6 +159,7 @@ abstract class BaseRenderer implements RendererInterface
         $order = [
             'interfaces',
             'classes',
+            'traits',
         ];
 
         foreach ($this->context->getNamespaces() as $namespace) {
@@ -232,6 +234,12 @@ abstract class BaseRenderer implements RendererInterface
 
     /** {@inheritDoc} */
     public function renderClasses(ClassElement $interface): string
+    {
+        throw new RuntimeException('Successor renderer must implement ' . __FUNCTION__ . '() method');
+    }
+
+    /** {@inheritDoc} */
+    public function renderTraits(TraitElement $trait): string
     {
         throw new RuntimeException('Successor renderer must implement ' . __FUNCTION__ . '() method');
     }

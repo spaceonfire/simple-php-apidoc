@@ -11,6 +11,8 @@ use phpDocumentor\Reflection\Php\Class_;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\Collections\MethodsCollection;
 use spaceonfire\SimplePhpApiDoc\Elements\Collections\PropertiesCollection;
+use spaceonfire\SimplePhpApiDoc\Elements\Collections\TraitsCollection;
+use spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver\ClassDocBlockResolver;
 
 class ClassElement extends BaseElement implements ElementDecoratorInterface, MethodOwnerInterface, PropertyOwnerInterface
 {
@@ -30,6 +32,14 @@ class ClassElement extends BaseElement implements ElementDecoratorInterface, Met
      * @var MethodsCollection
      */
     protected $methods;
+    /**
+     * @var DocBlock|null
+     */
+    protected $docBlock;
+    /**
+     * @var TraitsCollection
+     */
+    protected $traits;
 
     /**
      * ClassElement constructor.
@@ -141,6 +151,12 @@ class ClassElement extends BaseElement implements ElementDecoratorInterface, Met
             $this->methods = new MethodsCollection(array_map(function ($prop) {
                 return $this->context->elementFactory($prop)->setOwner($this);
             }, $this->proxy(__FUNCTION__, func_get_args())));
+
+            $this->methods = $this->methods->merge(
+                $this->getUsedTraits()->getMethods()->map(function (MethodElement $method) {
+                    return (clone $method)->setOwner($this);
+                })
+            );
         }
 
         if ($includeParent && $this->getParent()) {
@@ -167,8 +183,14 @@ class ClassElement extends BaseElement implements ElementDecoratorInterface, Met
     {
         if ($this->properties === null) {
             $this->properties = new PropertiesCollection(array_map(function ($prop) {
-                return $this->context->elementFactory($prop);
+                return $this->context->elementFactory($prop)->setOwner($this);
             }, $this->proxy(__FUNCTION__, func_get_args())));
+
+            $this->properties = $this->properties->merge(
+                $this->getUsedTraits()->getProperties()->map(function (PropertyElement $prop) {
+                    return (clone $prop)->setOwner($this);
+                })
+            );
         }
 
         if ($includeParent && $this->getParent()) {
@@ -182,9 +204,23 @@ class ClassElement extends BaseElement implements ElementDecoratorInterface, Met
         });
     }
 
-    public function getUsedTraits(): array
+    /**
+     * @return TraitsCollection
+     */
+    public function getUsedTraits(): TraitsCollection
     {
-        return $this->proxy(__FUNCTION__, func_get_args());
+        if ($this->traits === null) {
+            $this->traits = new TraitsCollection(array_map(function (Fqsen $traitName) {
+                return $this->getContext()->getElement((string)$traitName);
+            }, $this->getUsedTraitsFqsen()));
+        }
+
+        return $this->traits;
+    }
+
+    public function getUsedTraitsFqsen(): array
+    {
+        return $this->proxy('getUsedTraits', func_get_args());
     }
 
     public function getFqsen(): Fqsen
@@ -199,7 +235,15 @@ class ClassElement extends BaseElement implements ElementDecoratorInterface, Met
 
     public function getDocBlock(): ?DocBlock
     {
-        return $this->proxy(__FUNCTION__, func_get_args());
+        if ($this->docBlock === null) {
+            if (!($docBlock = $this->proxy(__FUNCTION__, func_get_args()))) {
+                return null;
+            }
+
+            $this->docBlock = (new ClassDocBlockResolver($docBlock, $this))->resolve();
+        }
+
+        return $this->docBlock;
     }
 
     public function getLocation(): Location

@@ -8,6 +8,7 @@ use phpDocumentor\Reflection\Fqsen;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
 use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
+use spaceonfire\SimplePhpApiDoc\Elements\TraitElement;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -38,6 +39,13 @@ interface RendererInterface
      * @return string
      */
     public function renderClasses(ClassElement $interface): string;
+
+    /**
+     * Render documentation content for class
+     * @param TraitElement $trait
+     * @return string
+     */
+    public function renderTraits(TraitElement $trait): string;
 
 
     /**

@@ -11,6 +11,7 @@ use phpDocumentor\Reflection\Location;
 use phpDocumentor\Reflection\Php\Property;
 use phpDocumentor\Reflection\Php\Visibility;
 use spaceonfire\SimplePhpApiDoc\Context;
+use spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver\PropertyDocBlockResolver;
 
 class PropertyElement extends BaseElement implements ElementDecoratorInterface, ElementVisibilityInterface
 {
@@ -18,6 +19,14 @@ class PropertyElement extends BaseElement implements ElementDecoratorInterface, 
      * @var Property
      */
     protected $element;
+    /**
+     * @var DocBlock|null
+     */
+    protected $docBlock;
+    /**
+     * @var PropertyOwnerInterface
+     */
+    protected $owner;
 
     /**
      * PropertyElement constructor.
@@ -46,6 +55,26 @@ class PropertyElement extends BaseElement implements ElementDecoratorInterface, 
     public function setElement($element)
     {
         $this->element = $element;
+        return $this;
+    }
+
+    /**
+     * Getter for `owner` property
+     * @return PropertyOwnerInterface
+     */
+    public function getOwner(): PropertyOwnerInterface
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Setter for `owner` property
+     * @param PropertyOwnerInterface $owner
+     * @return PropertyElement
+     */
+    public function setOwner(PropertyOwnerInterface $owner): PropertyElement
+    {
+        $this->owner = $owner;
         return $this;
     }
 
@@ -113,7 +142,15 @@ class PropertyElement extends BaseElement implements ElementDecoratorInterface, 
      */
     public function getDocBlock(): ?DocBlock
     {
-        return $this->proxy(__FUNCTION__, func_get_args());
+        if ($this->docBlock === null) {
+            if (!($docBlock = $this->proxy(__FUNCTION__, func_get_args()))) {
+                return null;
+            }
+
+            $this->docBlock = (new PropertyDocBlockResolver($docBlock, $this))->resolve();
+        }
+
+        return $this->docBlock;
     }
 
     public function getLocation(): Location

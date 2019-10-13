@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var $class \spaceonfire\SimplePhpApiDoc\Elements\ClassElement
+ * @var $trait \spaceonfire\SimplePhpApiDoc\Elements\TraitElement
  * @var $this \spaceonfire\SimplePhpApiDoc\Renderers\Markdown\MarkdownRenderer
  */
 
@@ -10,42 +10,28 @@ use spaceonfire\SimplePhpApiDoc\Elements\PropertyElement;
 use spaceonfire\SimplePhpApiDoc\Renderers\Markdown\MarkdownHelper;
 
 $lines = [
-    MarkdownHelper::header('Class ' . $class->getName()),
+    MarkdownHelper::header('Class ' . $trait->getName()),
 ];
 
-if ($docblock = $class->getDocBlock()) {
+if ($docblock = $trait->getDocBlock()) {
     $docblockLines = include __DIR__ . '/_docblock.php';
     $lines[] = '';
     $lines = array_merge($lines, $docblockLines);
 }
 
 $infoList = [
-    'Full name: ' . MarkdownHelper::code($class->getFqsen()),
+    'Full name: ' . MarkdownHelper::code($trait->getFqsen()),
 ];
-if ($parent = $class->getParent()) {
-    $infoList[] = 'Parent class: ' . MarkdownHelper::code($parent->getFqsen());
-}
-if (!empty($class->getInterfaces())) {
+
+if (!empty($trait->getUsedTraitsFqsen())) {
     $implementsList = array_map(static function ($interface) {
         return MarkdownHelper::code($interface);
-    }, $class->getInterfaces());
+    }, $trait->getUsedTraitsFqsen());
 
     if (count($implementsList) === 1) {
-        $infoList[] = 'This class implements: ' . reset($implementsList);
+        $infoList[] = 'This trait uses: ' . reset($implementsList);
     } else {
-        $infoList[] = 'This class implements:';
-        $infoList[] = MarkdownHelper::ul($implementsList);
-    }
-}
-if (!empty($class->getUsedTraitsFqsen())) {
-    $implementsList = array_map(static function ($interface) {
-        return MarkdownHelper::code($interface);
-    }, $class->getUsedTraitsFqsen());
-
-    if (count($implementsList) === 1) {
-        $infoList[] = 'This class uses: ' . reset($implementsList);
-    } else {
-        $infoList[] = 'This class uses:';
+        $infoList[] = 'This trait uses:';
         $infoList[] = MarkdownHelper::ul($implementsList);
     }
 }
@@ -53,13 +39,7 @@ if (!empty($class->getUsedTraitsFqsen())) {
 $lines[] = '';
 $lines = array_merge($lines, MarkdownHelper::ul($infoList));
 
-if (!empty($constants = $class->getConstants())) {
-    $constantsLines = include __DIR__ . '/_constants.php';
-    $lines[] = '';
-    $lines = array_merge($lines, $constantsLines);
-}
-
-$propertiesCollection = $class
+$propertiesCollection = $trait
     ->getProperties()
     ->filterByVisibility($this->getPropertiesVisibility())
     ->sortBy(static function (PropertyElement $property) {
@@ -72,7 +52,7 @@ if (!$propertiesCollection->isEmpty()) {
     $lines = array_merge($lines, $propertiesLines);
 }
 
-$methodsCollection = $class
+$methodsCollection = $trait
     ->getMethods()
     ->filterByVisibility($this->getMethodsVisibility())
     ->sortBy(static function (MethodElement $method) {
