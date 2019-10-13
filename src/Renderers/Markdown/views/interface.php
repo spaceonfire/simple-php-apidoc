@@ -56,4 +56,7 @@ if (!$methodsCollection->isEmpty()) {
     $lines = array_merge($lines, $methodsLines);
 }
 
+$footerLines = include __DIR__ . '/_footer.php';
+$lines = array_merge($lines, $footerLines);
+
 echo implode(PHP_EOL, $lines);

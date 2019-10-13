@@ -42,6 +42,21 @@ class MarkdownRenderer extends BaseRenderer
      * {@inheritDoc}
      * @throws Throwable
      */
+    public function run(): void
+    {
+        parent::run();
+
+        // Save TOC
+        $this->fs->dumpFile(
+            $this->outputDir . DIRECTORY_SEPARATOR . 'README.md',
+            $this->renderTableOfContents()
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     * @throws Throwable
+     */
     public function renderInterfaces(InterfaceElement $interface): string
     {
         return $this->renderFile('interface.php', compact('interface'));
@@ -63,5 +78,15 @@ class MarkdownRenderer extends BaseRenderer
     public function renderTraits(TraitElement $trait): string
     {
         return $this->renderFile('trait.php', compact('trait'));
+    }
+
+    /**
+     * Renders table of contents
+     * @return string
+     * @throws Throwable
+     */
+    public function renderTableOfContents(): string
+    {
+        return $this->renderFile('toc.php', ['context' => $this->context]);
     }
 }

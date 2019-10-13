@@ -123,4 +123,9 @@ class MarkdownHelper
         $row[] = '';
         return implode('|', $row);
     }
+
+    public static function hr()
+    {
+        return '---';
+    }
 }
