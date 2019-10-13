@@ -35,6 +35,14 @@ abstract class BaseRenderer implements RendererInterface
      * @var OutputInterface Output interface of Symfony Console Component
      */
     protected $output;
+    /**
+     * @var int
+     */
+    protected $propertiesVisibility;
+    /**
+     * @var int
+     */
+    protected $methodsVisibility;
 
     public function __construct(Context $context = null, string $outputDir = null)
     {
@@ -112,6 +120,32 @@ abstract class BaseRenderer implements RendererInterface
     public function setOutput(OutputInterface $output): RendererInterface
     {
         $this->output = $output;
+        return $this;
+    }
+
+    /** {@inheritDoc} */
+    public function getPropertiesVisibility(): int
+    {
+        return $this->propertiesVisibility;
+    }
+
+    /** {@inheritDoc} */
+    public function setPropertiesVisibility(int $propertiesVisibility): RendererInterface
+    {
+        $this->propertiesVisibility = $propertiesVisibility;
+        return $this;
+    }
+
+    /** {@inheritDoc} */
+    public function getMethodsVisibility(): int
+    {
+        return $this->methodsVisibility;
+    }
+
+    /** {@inheritDoc} */
+    public function setMethodsVisibility(int $methodsVisibility): RendererInterface
+    {
+        $this->methodsVisibility = $methodsVisibility;
         return $this;
     }
 

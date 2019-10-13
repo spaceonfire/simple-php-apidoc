@@ -104,4 +104,30 @@ interface RendererInterface
      * @return static
      */
     public function setOutput(OutputInterface $output): RendererInterface;
+
+    /**
+     * Getter for `propertiesVisibility` property
+     * @return int
+     */
+    public function getPropertiesVisibility(): int;
+
+    /**
+     * Setter for `propertiesVisibility` property
+     * @param int $propertiesVisibility
+     * @return static
+     */
+    public function setPropertiesVisibility(int $propertiesVisibility): RendererInterface;
+
+    /**
+     * Getter for `methodsVisibility` property
+     * @return int
+     */
+    public function getMethodsVisibility(): int;
+
+    /**
+     * Setter for `methodsVisibility` property
+     * @param int $methodsVisibility
+     * @return static
+     */
+    public function setMethodsVisibility(int $methodsVisibility): RendererInterface;
 }
