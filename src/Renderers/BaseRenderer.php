@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace spaceonfire\SimplePhpApiDoc\Renderers;
 
 use phpDocumentor\Reflection\Fqsen;
-use phpDocumentor\Reflection\Php\Interface_;
 use RuntimeException;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
+use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -191,7 +191,7 @@ abstract class BaseRenderer implements RendererInterface
     }
 
     /** {@inheritDoc} */
-    public function renderInterfaces(Interface_ $interface): string
+    public function renderInterfaces(InterfaceElement $interface): string
     {
         throw new RuntimeException('Successor renderer must implement ' . __FUNCTION__ . '() method');
     }

@@ -9,15 +9,17 @@ use phpDocumentor\Reflection\Fqsen;
 use phpDocumentor\Reflection\Location;
 use phpDocumentor\Reflection\Php\Class_;
 use spaceonfire\SimplePhpApiDoc\Context;
+use spaceonfire\SimplePhpApiDoc\Elements\Collections\MethodsCollection;
+use spaceonfire\SimplePhpApiDoc\Elements\Collections\PropertiesCollection;
 
-class ClassElement extends BaseElement
+class ClassElement extends BaseElement implements ElementDecoratorInterface, MethodOwnerInterface, PropertyOwnerInterface
 {
     /**
      * @var Class_
      */
     protected $element;
     /**
-     * @var PropertyElement[]
+     * @var PropertiesCollection
      */
     protected $properties;
     /**
@@ -25,7 +27,7 @@ class ClassElement extends BaseElement
      */
     protected $constants;
     /**
-     * @var MethodElement[]
+     * @var MethodsCollection
      */
     protected $methods;
 
@@ -130,45 +132,54 @@ class ClassElement extends BaseElement
     }
 
     /**
+     * {@inheritDoc}
      * @param bool $includeParent
-     * @return MethodElement[]
      */
-    public function getMethods(bool $includeParent = true): array
+    public function getMethods(bool $includeParent = true): MethodsCollection
     {
         if ($this->methods === null) {
-            $this->methods = array_map(function ($prop) {
-                return $this->context->elementFactory($prop)->setClass($this);
-            }, $this->proxy(__FUNCTION__, func_get_args()));
+            $this->methods = new MethodsCollection(array_map(function ($prop) {
+                return $this->context->elementFactory($prop)->setOwner($this);
+            }, $this->proxy(__FUNCTION__, func_get_args())));
         }
 
         if ($includeParent && $this->getParent()) {
-            $parentConst = $this->getParent()->getMethods();
+            $parentMethods = $this->getParent()->getMethods()
+                ->filter(static function (MethodElement $method) {
+                    return $method->getName() !== '__construct';
+                });
+
+            $result = (new MethodsCollection())->merge($parentMethods, $this->methods);
         } else {
-            $parentConst = [];
+            $result = clone $this->methods;
         }
 
-        return array_merge($parentConst, $this->methods);
+        return $result->indexBy(static function (MethodElement $method) {
+            return $method->getName();
+        });
     }
 
     /**
+     * {@inheritDoc}
      * @param bool $includeParent
-     * @return PropertyElement[]
      */
-    public function getProperties(bool $includeParent = true): array
+    public function getProperties(bool $includeParent = true): PropertiesCollection
     {
         if ($this->properties === null) {
-            $this->properties = array_map(function ($prop) {
+            $this->properties = new PropertiesCollection(array_map(function ($prop) {
                 return $this->context->elementFactory($prop);
-            }, $this->proxy(__FUNCTION__, func_get_args()));
+            }, $this->proxy(__FUNCTION__, func_get_args())));
         }
 
         if ($includeParent && $this->getParent()) {
-            $parentProps = $this->getParent()->getProperties();
+            $result = (new PropertiesCollection())->merge($this->getParent()->getProperties(), $this->properties);
         } else {
-            $parentProps = [];
+            $result = clone $this->properties;
         }
 
-        return array_merge($parentProps, $this->properties);
+        return $result->indexBy(static function (PropertyElement $prop) {
+            return $prop->getName();
+        });
     }
 
     public function getUsedTraits(): array

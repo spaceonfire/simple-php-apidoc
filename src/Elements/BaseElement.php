@@ -7,7 +7,7 @@ namespace spaceonfire\SimplePhpApiDoc\Elements;
 use phpDocumentor\Reflection\Element;
 use spaceonfire\SimplePhpApiDoc\Context;
 
-abstract class BaseElement
+abstract class BaseElement implements ElementInterface
 {
     /**
      * @var Element

@@ -7,38 +7,43 @@ namespace spaceonfire\SimplePhpApiDoc\Elements;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\Fqsen;
 use phpDocumentor\Reflection\Location;
-use phpDocumentor\Reflection\Php\Constant;
+use phpDocumentor\Reflection\Php\Function_;
+use phpDocumentor\Reflection\Type;
 use spaceonfire\SimplePhpApiDoc\Context;
 
-class ConstantElement extends BaseElement implements ElementDecoratorInterface
+class FunctionElement extends BaseElement implements ElementDecoratorInterface
 {
     /**
-     * @var Constant
+     * @var Function_
      */
     protected $element;
+    /**
+     * @var ArgumentElement[]
+     */
+    protected $arguments;
 
     /**
-     * ClassElement constructor.
-     * @param Constant $element
+     * FunctionElement constructor.
+     * @param Function_ $element
      * @param Context $context
      */
-    public function __construct(Constant $element, Context $context)
+    public function __construct(Function_ $element, Context $context)
     {
         parent::__construct($element, $context);
     }
 
     /**
      * Getter for `element` property
-     * @return Constant
+     * @return Function_
      */
-    public function getElement(): Constant
+    public function getElement(): Function_
     {
         return $this->element;
     }
 
     /**
      * Setter for `element` property
-     * @param Constant $element
+     * @param Function_ $element
      * @return static
      */
     public function setElement($element)
@@ -48,11 +53,18 @@ class ConstantElement extends BaseElement implements ElementDecoratorInterface
     }
 
     /**
-     * Returns the value of this constant.
+     * Returns the arguments of this function.
+     * @return ArgumentElement[]
      */
-    public function getValue(): ?string
+    public function getArguments(): array
     {
-        return $this->proxy(__FUNCTION__, func_get_args());
+        if ($this->arguments === null) {
+            $this->arguments = array_map(function ($prop) {
+                return $this->context->elementFactory($prop);
+            }, $this->proxy(__FUNCTION__, func_get_args()));
+        }
+
+        return $this->arguments;
     }
 
     /**
@@ -72,7 +84,7 @@ class ConstantElement extends BaseElement implements ElementDecoratorInterface
     }
 
     /**
-     * Returns DocBlock of this constant if available.
+     * Returns the DocBlock of the element if available
      */
     public function getDocBlock(): ?DocBlock
     {
@@ -80,6 +92,11 @@ class ConstantElement extends BaseElement implements ElementDecoratorInterface
     }
 
     public function getLocation(): Location
+    {
+        return $this->proxy(__FUNCTION__, func_get_args());
+    }
+
+    public function getReturnType(): Type
     {
         return $this->proxy(__FUNCTION__, func_get_args());
     }

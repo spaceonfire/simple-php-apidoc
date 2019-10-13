@@ -12,7 +12,7 @@ use phpDocumentor\Reflection\Php\Property;
 use phpDocumentor\Reflection\Php\Visibility;
 use spaceonfire\SimplePhpApiDoc\Context;
 
-class PropertyElement extends BaseElement
+class PropertyElement extends BaseElement implements ElementDecoratorInterface, ElementVisibilityInterface
 {
     /**
      * @var Property
@@ -71,12 +71,22 @@ class PropertyElement extends BaseElement
      */
     public function getTypes(): array
     {
-        return $this->proxy(__FUNCTION__, func_get_args());
+        if (!empty(($types = $this->proxy(__FUNCTION__, func_get_args())))) {
+            return $types;
+        }
+
+        if (($docBlock = $this->getDocBlock()) === null) {
+            return [];
+        }
+
+        $tags = $docBlock->getTagsByName('var');
+        /** @var Var_|null $var */
+        $var = reset($tags);
+
+        return $var ? explode('|', (string)$var->getType()) : [];
     }
 
-    /**
-     * Return visibility of the property.
-     */
+    /** {@inheritDoc} */
     public function getVisibility(): ?Visibility
     {
         return $this->proxy(__FUNCTION__, func_get_args());
@@ -126,5 +136,28 @@ class PropertyElement extends BaseElement
             trim((string)$docBlock->getDescription()),
             $varTag ? trim((string)$varTag->getDescription()) : ''
         ])));
+    }
+
+    public function __toString()
+    {
+        return $this->getSignature();
+    }
+
+    public function getSignature(): string
+    {
+        $sig = [];
+        $sig[] = $this->getVisibility();
+        if ($this->isStatic()) {
+            $sig[] = 'static';
+        }
+        $sig[] = implode('|', $this->getTypes());
+        $sig[] = '$' . $this->getName();
+
+        if ($this->getDefault()) {
+            $sig[] = '=';
+            $sig[] = $this->getDefault();
+        }
+
+        return implode(' ' , array_filter($sig));
     }
 }

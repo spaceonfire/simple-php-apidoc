@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace spaceonfire\SimplePhpApiDoc\Renderers;
 
 use phpDocumentor\Reflection\Fqsen;
-use phpDocumentor\Reflection\Php\Class_;
-use phpDocumentor\Reflection\Php\Interface_;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
+use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -28,10 +27,10 @@ interface RendererInterface
 
     /**
      * Render documentation content for interface
-     * @param Interface_ $interface
+     * @param InterfaceElement $interface
      * @return string
      */
-    public function renderInterfaces(Interface_ $interface): string;
+    public function renderInterfaces(InterfaceElement $interface): string;
 
     /**
      * Render documentation content for class

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace spaceonfire\SimplePhpApiDoc\Renderers\Markdown;
 
 use phpDocumentor\Reflection\Fqsen;
-use phpDocumentor\Reflection\Php\Class_;
-use phpDocumentor\Reflection\Php\Interface_;
 use spaceonfire\SimplePhpApiDoc\Context;
 use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
+use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
 use spaceonfire\SimplePhpApiDoc\Renderers\BaseRenderer;
 use Throwable;
 
@@ -42,7 +41,7 @@ class MarkdownRenderer extends BaseRenderer
      * {@inheritDoc}
      * @throws Throwable
      */
-    public function renderInterfaces(Interface_ $interface): string
+    public function renderInterfaces(InterfaceElement $interface): string
     {
         return $this->renderFile('interface.php', compact('interface'));
     }

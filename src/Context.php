@@ -6,20 +6,19 @@ namespace spaceonfire\SimplePhpApiDoc;
 
 use phpDocumentor\Reflection\Element;
 use phpDocumentor\Reflection\File\LocalFile;
-use phpDocumentor\Reflection\Php\Argument;
-use phpDocumentor\Reflection\Php\Class_;
-use phpDocumentor\Reflection\Php\Constant;
+use phpDocumentor\Reflection\Php as PhpdocReflectionElements;
 use phpDocumentor\Reflection\Php\File;
-use phpDocumentor\Reflection\Php\Function_;
-use phpDocumentor\Reflection\Php\Interface_;
-use phpDocumentor\Reflection\Php\Method;
-use phpDocumentor\Reflection\Php\Namespace_;
 use phpDocumentor\Reflection\Php\Project;
 use phpDocumentor\Reflection\Php\ProjectFactory;
-use phpDocumentor\Reflection\Php\Property;
-use phpDocumentor\Reflection\Php\Trait_;
 use phpDocumentor\Reflection\Project as ProjectInterface;
 use spaceonfire\SimplePhpApiDoc\Elements\ClassElement;
+use spaceonfire\SimplePhpApiDoc\Elements\Collections\NamespacesCollection;
+use spaceonfire\SimplePhpApiDoc\Elements\ConstantElement;
+use spaceonfire\SimplePhpApiDoc\Elements\ElementInterface;
+use spaceonfire\SimplePhpApiDoc\Elements\FunctionElement;
+use spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement;
+use spaceonfire\SimplePhpApiDoc\Elements\NamespaceElement;
+use spaceonfire\SimplePhpApiDoc\Elements\TraitElement;
 use Symfony\Component\Finder\Finder;
 
 class Context
@@ -41,23 +40,27 @@ class Context
      */
     protected $classes;
     /**
-     * @var Interface_[]
+     * @var InterfaceElement[]
      */
     protected $interfaces;
     /**
-     * @var Trait_[]
+     * @var TraitElement[]
      */
     protected $traits;
     /**
-     * @var Constant[]
+     * @var ConstantElement[]
      */
     protected $constants;
     /**
-     * @var Function_[]
+     * @var NamespacesCollection
+     */
+    protected $namespaces;
+    /**
+     * @var FunctionElement[]
      */
     protected $functions;
     /**
-     * @var array
+     * @var File[]|array Map full qualified name to file object where it declared
      */
     protected $filesMap;
 
@@ -100,14 +103,23 @@ class Context
         return $this->project;
     }
 
+    /**
+     * Decorate phpDocumentor elements with custom element classes
+     * @param Element|mixed $element Element to decorate
+     * @return ElementInterface|mixed Decorated element or source element if there no mappings for this type
+     */
     public function elementFactory($element)
     {
         $map = [
-            Argument::class => Elements\ArgumentElement::class,
-            Class_::class => Elements\ClassElement::class,
-            Constant::class => Elements\ConstantElement::class,
-            Property::class => Elements\PropertyElement::class,
-            Method::class => Elements\MethodElement::class,
+            PhpdocReflectionElements\Argument::class => Elements\ArgumentElement::class,
+            PhpdocReflectionElements\Class_::class => Elements\ClassElement::class,
+            PhpdocReflectionElements\Constant::class => Elements\ConstantElement::class,
+            PhpdocReflectionElements\Function_::class => Elements\FunctionElement::class,
+            PhpdocReflectionElements\Interface_::class => Elements\InterfaceElement::class,
+            PhpdocReflectionElements\Method::class => Elements\MethodElement::class,
+            PhpdocReflectionElements\Namespace_::class => Elements\NamespaceElement::class,
+            PhpdocReflectionElements\Property::class => Elements\PropertyElement::class,
+            PhpdocReflectionElements\Trait_::class => Elements\TraitElement::class,
         ];
 
         if (!isset($map[get_class($element)])) {
@@ -132,16 +144,25 @@ class Context
 
     /**
      * Returns all namespaces with their sub-elements.
-     * @return Namespace_[]
+     * @return NamespacesCollection
      */
-    public function getNamespaces(): array
+    public function getNamespaces(): NamespacesCollection
     {
-        return $this->proxyProject(__FUNCTION__, func_get_args());
+        if ($this->namespaces === null) {
+            $this->namespaces = new NamespacesCollection(array_map(function ($prop) {
+                return $this->elementFactory($prop);
+            }, $this->proxyProject(__FUNCTION__, func_get_args())));
+            $this->namespaces = $this->namespaces->sortBy(function (NamespaceElement $namespace) {
+                return (string)$namespace->getFqsen();
+            }, SORT_ASC, SORT_NATURAL);
+        }
+
+        return $this->namespaces;
     }
 
     /**
      * @param string $method
-     * @return Element[]
+     * @return array
      */
     protected function buildMap(string $method): array
     {
@@ -172,7 +193,7 @@ class Context
 
     /**
      * Returns a list of interface descriptors contained in project files.
-     * @return Interface_[]
+     * @return InterfaceElement[]
      */
     public function getInterfaces(): array
     {
@@ -185,7 +206,7 @@ class Context
 
     /**
      * Returns a list of trait descriptors contained in project files.
-     * @return Trait_[]
+     * @return TraitElement[]
      */
     public function getTraits(): array
     {
@@ -198,7 +219,7 @@ class Context
 
     /**
      * Returns a list of constant descriptors contained in project files.
-     * @return Constant[]
+     * @return ConstantElement[]
      */
     public function getConstants(): array
     {
@@ -211,7 +232,7 @@ class Context
 
     /**
      * Returns a list of function descriptors contained in project files.
-     * @return Function_[]
+     * @return FunctionElement[]
      */
     public function getFunctions(): array
     {
@@ -235,7 +256,7 @@ class Context
     /**
      * Get element object by name
      * @param string $fqsen Fully Qualified Structural Element Name
-     * @return Element|mixed|null
+     * @return mixed|null
      */
     public function getElement(string $fqsen)
     {
