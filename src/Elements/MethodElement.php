@@ -11,21 +11,26 @@ use phpDocumentor\Reflection\Php\Method;
 use phpDocumentor\Reflection\Php\Visibility;
 use phpDocumentor\Reflection\Type;
 use spaceonfire\SimplePhpApiDoc\Context;
+use spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver\MethodsDocBlockResolver;
 
-class MethodElement extends BaseElement
+class MethodElement extends BaseElement implements ElementDecoratorInterface, ElementVisibilityInterface
 {
     /**
      * @var Method
      */
     protected $element;
     /**
-     * @var ClassElement
+     * @var MethodOwnerInterface
      */
-    protected $class;
+    protected $owner;
     /**
      * @var ArgumentElement[]
      */
     protected $arguments;
+    /**
+     * @var DocBlock
+     */
+    protected $docBlock;
 
     /**
      * MethodElement constructor.
@@ -58,22 +63,22 @@ class MethodElement extends BaseElement
     }
 
     /**
-     * Getter for `class` property
-     * @return ClassElement
+     * Getter for `owner` property
+     * @return MethodOwnerInterface
      */
-    public function getClass(): ClassElement
+    public function getOwner(): MethodOwnerInterface
     {
-        return $this->class;
+        return $this->owner;
     }
 
     /**
-     * Setter for `class` property
-     * @param ClassElement $class
+     * Setter for `owner` property
+     * @param MethodOwnerInterface $owner
      * @return static
      */
-    public function setClass(ClassElement $class)
+    public function setOwner(MethodOwnerInterface $owner): MethodElement
     {
-        $this->class = $class;
+        $this->owner = $owner;
         return $this;
     }
 
@@ -101,9 +106,7 @@ class MethodElement extends BaseElement
         return $this->proxy(__FUNCTION__, func_get_args());
     }
 
-    /**
-     * Returns the Visibility of this method.
-     */
+    /** {@inheritDoc} */
     public function getVisibility(): ?Visibility
     {
         return $this->proxy(__FUNCTION__, func_get_args());
@@ -111,7 +114,6 @@ class MethodElement extends BaseElement
 
     /**
      * Returns the arguments of this method.
-     *
      * @return ArgumentElement[]
      */
     public function getArguments(): array
@@ -143,12 +145,19 @@ class MethodElement extends BaseElement
 
     /**
      * Returns the DocBlock of this method if available.
-     *
-     * @returns null|DocBlock
+     * @returns DocBlock|null
      */
     public function getDocBlock(): ?DocBlock
     {
-        return $this->proxy(__FUNCTION__, func_get_args());
+        if ($this->docBlock === null) {
+            if (!($docBlock = $this->proxy(__FUNCTION__, func_get_args()))) {
+                return null;
+            }
+
+            $this->docBlock = (new MethodsDocBlockResolver($docBlock, $this))->resolve();
+        }
+
+        return $this->docBlock;
     }
 
     public function getLocation(): Location
@@ -162,6 +171,8 @@ class MethodElement extends BaseElement
      * Return types are introduced in php 7.0 when your could doesn't have a
      * return type defined this method will return Mixed_ by default. The return value of this
      * method is not affected by the return tag in your docblock.
+     *
+     * @return Type
      */
     public function getReturnType(): Type
     {
@@ -205,7 +216,7 @@ class MethodElement extends BaseElement
 
     public function getFileLocation(): ?string
     {
-        if (!($file = $this->context->getFile((string)$this->getClass()->getFqsen()))) {
+        if (!($file = $this->context->getFile((string)$this->getOwner()->getFqsen()))) {
             return null;
         }
 

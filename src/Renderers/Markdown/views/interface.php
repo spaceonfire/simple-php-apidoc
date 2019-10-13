@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var $interface \phpDocumentor\Reflection\Php\Interface_
+ * @var $interface \spaceonfire\SimplePhpApiDoc\Elements\InterfaceElement
  */
 
 ?>
