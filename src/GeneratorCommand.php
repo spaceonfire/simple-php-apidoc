@@ -113,12 +113,46 @@ class GeneratorCommand extends Command
         $this
             ->setName('generate')
             ->addArgument('src', InputArgument::OPTIONAL | InputArgument::IS_ARRAY)
-            ->addOption('projectName', 'p', InputOption::VALUE_OPTIONAL, '', $this->composer['name'])
-            ->addOption('visibility', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Visibility filter for both methods and properties', ['public'])
-            ->addOption('propertiesVisibility', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Visibility filter for properties')
-            ->addOption('methodsVisibility', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Visibility filter for methods')
-            ->addOption('output', 'o', InputOption::VALUE_REQUIRED, '', 'docs')
-            ->addOption('rendererClass', 'r', InputOption::VALUE_OPTIONAL, '', MarkdownRenderer::class);
+            ->addOption(
+                'projectName',
+                'p',
+                InputOption::VALUE_OPTIONAL,
+                '',
+                $this->composer['name']
+            )
+            ->addOption(
+                'visibility',
+                null,
+                InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+                'Visibility filter for both methods and properties',
+                ['public']
+            )
+            ->addOption(
+                'propertiesVisibility',
+                null,
+                InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+                'Visibility filter for properties'
+            )
+            ->addOption(
+                'methodsVisibility',
+                null,
+                InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+                'Visibility filter for methods'
+            )
+            ->addOption(
+                'output',
+                'o',
+                InputOption::VALUE_REQUIRED,
+                '',
+                'docs'
+            )
+            ->addOption(
+                'rendererClass',
+                'r',
+                InputOption::VALUE_OPTIONAL,
+                '',
+                MarkdownRenderer::class
+            );
     }
 
     /** {@inheritDoc} */

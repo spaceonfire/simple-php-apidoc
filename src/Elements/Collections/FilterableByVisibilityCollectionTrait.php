@@ -15,7 +15,11 @@ trait FilterableByVisibilityCollectionTrait
         $includeProtected = $visibility & static::VISIBILITY_PROTECTED;
         $includePrivate = $visibility & static::VISIBILITY_PRIVATE;
 
-        return $this->filter(static function (ElementVisibilityInterface $item) use ($includePublic, $includeProtected, $includePrivate) {
+        return $this->filter(static function (ElementVisibilityInterface $item) use (
+            $includePublic,
+            $includeProtected,
+            $includePrivate
+        ) {
             $visibility = (string)$item->getVisibility();
             return
                 ($includePublic && $visibility === 'public') ||

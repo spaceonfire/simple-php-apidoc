@@ -14,7 +14,11 @@ $propertiesTable[] = ['Property', 'Type', 'Description', 'Default Value'];
 foreach ($propertiesCollection as $property) {
     $types = $property->getTypes();
     $propertiesTable[] = [
-        MarkdownHelper::code($property->getVisibility() . ($property->isStatic() ? ' static' : '') . ' $' . $property->getName()),
+        MarkdownHelper::code(
+            $property->getVisibility() .
+            ($property->isStatic() ? ' static' : '') .
+            ' $' . $property->getName()
+        ),
         empty($types) ? '' : '<code>' . implode('&#124;', $types) . '</code>',
         str_replace(PHP_EOL, ' ', $property->getDescription()),
         $property->getDefault() ?? ''

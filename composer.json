@@ -1,7 +1,7 @@
 {
   "name": "spaceonfire/simple-php-apidoc",
   "type": "library",
-  "description": "Simple documentation generator for API or your PHP library",
+  "description": "Simple API documentation generator for your PHP library",
   "keywords": [
     "phpdoc",
     "apidoc",
@@ -48,7 +48,8 @@
   "scripts": {
     "test": "phpunit",
     "check-style": "phpcs src tests",
-    "fix-style": "phpcbf src tests"
+    "fix-style": "phpcbf src tests",
+    "apidoc": "@php ./bin/apidoc --propertiesVisibility=public --propertiesVisibility=protected"
   },
   "extra": {
     "branch-alias": {

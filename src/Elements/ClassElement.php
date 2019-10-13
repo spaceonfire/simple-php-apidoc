@@ -14,7 +14,10 @@ use spaceonfire\SimplePhpApiDoc\Elements\Collections\PropertiesCollection;
 use spaceonfire\SimplePhpApiDoc\Elements\Collections\TraitsCollection;
 use spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver\ClassDocBlockResolver;
 
-class ClassElement extends BaseElement implements ElementDecoratorInterface, MethodOwnerInterface, PropertyOwnerInterface
+class ClassElement extends BaseElement implements
+    ElementDecoratorInterface,
+    MethodOwnerInterface,
+    PropertyOwnerInterface
 {
     /**
      * @var Class_

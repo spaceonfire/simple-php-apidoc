@@ -13,7 +13,10 @@ use spaceonfire\SimplePhpApiDoc\Elements\Collections\MethodsCollection;
 use spaceonfire\SimplePhpApiDoc\Elements\Collections\PropertiesCollection;
 use spaceonfire\SimplePhpApiDoc\Elements\Collections\TraitsCollection;
 
-class TraitElement extends BaseElement implements ElementDecoratorInterface, MethodOwnerInterface, PropertyOwnerInterface
+class TraitElement extends BaseElement implements
+    ElementDecoratorInterface,
+    MethodOwnerInterface,
+    PropertyOwnerInterface
 {
     /**
      * @var Trait_

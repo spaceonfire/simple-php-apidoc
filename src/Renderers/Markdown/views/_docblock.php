@@ -21,7 +21,10 @@ $tagsList = [];
 foreach ($docblock->getTags() as $tag) {
     switch ($tag->getName()) {
         case 'deprecated':
-            $content = trim($tag) !== '' ? $tag : '**Warning:** this class is **deprecated**. This means that this class will likely be removed in a future version.';
+            $content = trim($tag) !== '' ?
+                $tag :
+                '**Warning:** this class is **deprecated**. ' .
+                'This means that this class will likely be removed in a future version.';
             break;
     }
 

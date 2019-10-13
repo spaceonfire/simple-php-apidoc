@@ -195,6 +195,6 @@ class PropertyElement extends BaseElement implements ElementDecoratorInterface, 
             $sig[] = $this->getDefault();
         }
 
-        return implode(' ' , array_filter($sig));
+        return implode(' ', array_filter($sig));
     }
 }
