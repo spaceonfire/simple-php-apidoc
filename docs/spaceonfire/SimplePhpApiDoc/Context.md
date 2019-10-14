@@ -40,8 +40,8 @@ Decorate phpDocumentor elements with custom element classes
 
 |Param|Type|Description|
 |---|---|---|
-|`$element`|*\phpDocumentor\Reflection\Element|mixed*|Element to decorate|
-|**Return**|*\spaceonfire\SimplePhpApiDoc\Elements\ElementInterface|mixed*|Decorated element or source element if there no mappings for this type|
+|`$element`|*\phpDocumentor\Reflection\Element&#124;mixed*|Element to decorate|
+|**Return**|*\spaceonfire\SimplePhpApiDoc\Elements\ElementInterface&#124;mixed*|Decorated element or source element if there no mappings for this type|
 
 ```php
 public function Context::elementFactory(mixed $element): mixed
@@ -84,7 +84,7 @@ Get element object by name
 |Param|Type|Description|
 |---|---|---|
 |`$fqsen`|*string*|Fully Qualified Structural Element Name|
-|**Return**|*mixed|null*||
+|**Return**|*mixed&#124;null*||
 
 ```php
 public function Context::getElement(string $fqsen): mixed
@@ -99,7 +99,7 @@ Get file by element name
 |Param|Type|Description|
 |---|---|---|
 |`$fqsen`|*string*|Fully Qualified Structural Element Name|
-|**Return**|*\phpDocumentor\Reflection\Php\File|null*||
+|**Return**|*\phpDocumentor\Reflection\Php\File&#124;null*||
 
 ```php
 public function Context::getFile(string $fqsen): ?\spaceonfire\SimplePhpApiDoc\phpDocumentor\Reflection\Php\File
@@ -155,7 +155,7 @@ Getter for `project` property
 
 |Param|Type|Description|
 |---|---|---|
-|**Return**|*\phpDocumentor\Reflection\Php\Project|\phpDocumentor\Reflection\Project*||
+|**Return**|*\phpDocumentor\Reflection\Php\Project&#124;\phpDocumentor\Reflection\Project*||
 
 ```php
 public function Context::getProject(): \spaceonfire\SimplePhpApiDoc\phpDocumentor\Reflection\Project

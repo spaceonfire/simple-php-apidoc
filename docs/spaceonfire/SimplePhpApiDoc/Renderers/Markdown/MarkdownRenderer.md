@@ -28,8 +28,8 @@ MarkdownRenderer constructor.
 
 |Param|Type|Description|
 |---|---|---|
-|`$context`|*\spaceonfire\SimplePhpApiDoc\Context|null*||
-|`$outputDir`|*string|null*||
+|`$context`|*\spaceonfire\SimplePhpApiDoc\Context&#124;null*||
+|`$outputDir`|*string&#124;null*||
 
 ```php
 public function MarkdownRenderer::__construct(\spaceonfire\SimplePhpApiDoc\Context $context = null, string $outputDir = null): mixed

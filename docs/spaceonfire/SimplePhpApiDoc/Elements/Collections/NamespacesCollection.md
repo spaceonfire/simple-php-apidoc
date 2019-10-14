@@ -32,7 +32,7 @@ TODO: move to BaseCollection
 |Param|Type|Description|
 |---|---|---|
 |`$callback`|*callable*||
-|**Return**|*mixed|null*||
+|**Return**|*mixed&#124;null*||
 
 ```php
 public function TypedCollection::find(callable $callback): mixed

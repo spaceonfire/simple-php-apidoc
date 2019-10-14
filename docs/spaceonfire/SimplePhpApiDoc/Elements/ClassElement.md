@@ -156,7 +156,7 @@ Returns the superclass this class is extending if available.
 
 |Param|Type|Description|
 |---|---|---|
-|**Return**|*\phpDocumentor\Reflection\Fqsen|null*||
+|**Return**|*\phpDocumentor\Reflection\Fqsen&#124;null*||
 
 ```php
 public function ClassElement::getParentFqsen(): ?\spaceonfire\SimplePhpApiDoc\Elements\phpDocumentor\Reflection\Fqsen

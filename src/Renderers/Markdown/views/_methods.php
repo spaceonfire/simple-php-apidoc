@@ -31,12 +31,21 @@ foreach ($methodsCollection as $method) {
 
         $tagsTable = [['Param', 'Type', 'Description']];
         foreach ($docblock->getTags() as $tag) {
+            if (!in_array($tag->getName(), ['param', 'return', 'throw'], true)) {
+                continue;
+            }
+
+            $types = trim(implode('&#124;', explode('|', $tag->getType() ?? '')));
+            if ($types !== '') {
+                $types = MarkdownHelper::italic($types);
+            }
+
             switch ($tag->getName()) {
                 case 'param':
                     /** @var Param $tag */
                     $tagsTable[] = [
                         MarkdownHelper::code(($tag->isVariadic() ? '...' : '') . '$' . $tag->getVariableName()),
-                        $tag->getType() ? MarkdownHelper::italic((string)$tag->getType()) : null,
+                        $types,
                         (string)$tag->getDescription(),
                     ];
                     break;
@@ -45,7 +54,7 @@ foreach ($methodsCollection as $method) {
                     /** @var Return_ $tag */
                     $tagsTable[] = [
                         MarkdownHelper::strong('Return'),
-                        $tag->getType() ? MarkdownHelper::italic((string)$tag->getType()) : null,
+                        $types,
                         (string)$tag->getDescription(),
                     ];
                     break;
@@ -54,7 +63,7 @@ foreach ($methodsCollection as $method) {
                     /** @var Throws $tag */
                     $tagsTable[] = [
                         MarkdownHelper::strong('Throws'),
-                        $tag->getType() ? MarkdownHelper::italic((string)$tag->getType()) : null,
+                        $types,
                         (string)$tag->getDescription(),
                     ];
                     break;

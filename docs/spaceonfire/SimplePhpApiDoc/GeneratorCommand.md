@@ -17,7 +17,7 @@ GeneratorCommand constructor.
 
 |Param|Type|Description|
 |---|---|---|
-|`$name`|*string|null*||
+|`$name`|*string&#124;null*||
 |`$composer`|*array*||
 
 ```php

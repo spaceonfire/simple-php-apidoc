@@ -184,7 +184,7 @@ Returns the Visibility of this method.
 
 |Param|Type|Description|
 |---|---|---|
-|**Return**|*\phpDocumentor\Reflection\Php\Visibility|null*||
+|**Return**|*\phpDocumentor\Reflection\Php\Visibility&#124;null*||
 
 ```php
 public function MethodElement::getVisibility(): ?\spaceonfire\SimplePhpApiDoc\Elements\phpDocumentor\Reflection\Php\Visibility
