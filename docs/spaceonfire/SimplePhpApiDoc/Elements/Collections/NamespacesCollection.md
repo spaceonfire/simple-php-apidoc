@@ -1,13 +1,6 @@
 # Class NamespacesCollection
 
 - Full name: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\NamespacesCollection`
-- Parent class: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\TypedCollection`
-
-## Properties
-
-|Property|Type|Description|Default Value|
-|---|---|---|---|
-|`protected $type`|<code>string</code>|||
 
 ## Methods
 
@@ -23,22 +16,7 @@ NamespacesCollection constructor.
 public function NamespacesCollection::__construct(mixed $items = []): mixed
 ```
 
-File location: `src/Elements/Collections/NamespacesCollection.php:15`
-
-### find()
-
-TODO: move to BaseCollection
-
-|Param|Type|Description|
-|---|---|---|
-|`$callback`|*callable*||
-|**Return**|*mixed&#124;null*||
-
-```php
-public function TypedCollection::find(callable $callback): mixed
-```
-
-File location: `src/Elements/Collections/TypedCollection.php:50`
+File location: `src/Elements/Collections/NamespacesCollection.php:16`
 
 ---
 

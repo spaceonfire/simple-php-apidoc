@@ -1,13 +1,6 @@
 # Class TraitsCollection
 
 - Full name: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\TraitsCollection`
-- Parent class: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\TypedCollection`
-
-## Properties
-
-|Property|Type|Description|Default Value|
-|---|---|---|---|
-|`protected $type`|<code>string</code>|||
 
 ## Methods
 
@@ -23,22 +16,7 @@ TraitsCollection constructor.
 public function TraitsCollection::__construct(mixed $items = []): mixed
 ```
 
-File location: `src/Elements/Collections/TraitsCollection.php:15`
-
-### find()
-
-TODO: move to BaseCollection
-
-|Param|Type|Description|
-|---|---|---|
-|`$callback`|*callable*||
-|**Return**|*mixed&#124;null*||
-
-```php
-public function TypedCollection::find(callable $callback): mixed
-```
-
-File location: `src/Elements/Collections/TypedCollection.php:50`
+File location: `src/Elements/Collections/TraitsCollection.php:16`
 
 ### getMethods()
 
@@ -52,7 +30,7 @@ Returns collection of methods
 public function TraitsCollection::getMethods(): \spaceonfire\SimplePhpApiDoc\Elements\Collections\spaceonfire\SimplePhpApiDoc\Elements\Collections\MethodsCollection
 ```
 
-File location: `src/Elements/Collections/TraitsCollection.php:24`
+File location: `src/Elements/Collections/TraitsCollection.php:25`
 
 ### getProperties()
 
@@ -66,7 +44,7 @@ Returns collection of properties
 public function TraitsCollection::getProperties(): \spaceonfire\SimplePhpApiDoc\Elements\Collections\spaceonfire\SimplePhpApiDoc\Elements\Collections\PropertiesCollection
 ```
 
-File location: `src/Elements/Collections/TraitsCollection.php:36`
+File location: `src/Elements/Collections/TraitsCollection.php:37`
 
 ---
 

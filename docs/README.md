@@ -28,7 +28,6 @@
         - [NamespacesCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/NamespacesCollection.md)
         - [PropertiesCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/PropertiesCollection.md)
         - [TraitsCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/TraitsCollection.md)
-        - [TypedCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/TypedCollection.md)
     - Interfaces
         - [FilterableByVisibilityCollectionInterface](./spaceonfire/SimplePhpApiDoc/Elements/Collections/FilterableByVisibilityCollectionInterface.md)
     - Traits

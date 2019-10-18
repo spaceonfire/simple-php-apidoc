@@ -1,15 +1,8 @@
 # Class PropertiesCollection
 
 - Full name: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\PropertiesCollection`
-- Parent class: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\TypedCollection`
 - This class implements: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\FilterableByVisibilityCollectionInterface`
 - This class uses: `\spaceonfire\SimplePhpApiDoc\Elements\Collections\FilterableByVisibilityCollectionTrait`
-
-## Properties
-
-|Property|Type|Description|Default Value|
-|---|---|---|---|
-|`protected $type`|<code>string</code>|||
 
 ## Methods
 
@@ -25,7 +18,7 @@ PropertiesCollection constructor.
 public function PropertiesCollection::__construct(mixed $items = []): mixed
 ```
 
-File location: `src/Elements/Collections/PropertiesCollection.php:17`
+File location: `src/Elements/Collections/PropertiesCollection.php:18`
 
 ### filterByVisibility()
 
@@ -41,21 +34,6 @@ public function FilterableByVisibilityCollectionTrait::filterByVisibility(int $v
 ```
 
 File location: `src/Elements/Collections/PropertiesCollection.php:12`
-
-### find()
-
-TODO: move to BaseCollection
-
-|Param|Type|Description|
-|---|---|---|
-|`$callback`|*callable*||
-|**Return**|*mixed&#124;null*||
-
-```php
-public function TypedCollection::find(callable $callback): mixed
-```
-
-File location: `src/Elements/Collections/TypedCollection.php:50`
 
 ---
 
