@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\SimplePhpApiDoc\Elements\Collections;
 
+use spaceonfire\Collection\TypedCollection;
 use spaceonfire\SimplePhpApiDoc\Elements\TraitElement;
 
 class TraitsCollection extends TypedCollection

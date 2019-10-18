@@ -7,8 +7,8 @@ namespace spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tag;
 use phpDocumentor\Reflection\DocBlockFactory;
+use spaceonfire\Collection\TypedCollection;
 use spaceonfire\SimplePhpApiDoc\Context;
-use spaceonfire\SimplePhpApiDoc\Elements\Collections\TypedCollection;
 
 abstract class BaseDocBlockResolver
 {
