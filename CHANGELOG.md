@@ -22,6 +22,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.1.1] - 2019-11-08
+### Fixed
+- Fix passing empty string to doc block factory in buildDocBlock method
+
+## [1.1.0] - 2019-10-18
+### Removed
+- Move TypedCollection to `spaceonfire/collection`
+
 ## [1.0.1] - 2019-10-14
 ### Fixed
 - Fix argument types separator in table for methods

@@ -139,6 +139,6 @@ abstract class BaseDocBlockResolver
             $factory = DocBlockFactory::createInstance();
         }
 
-        return $factory->create($docBlockString);
+        return $factory->create($docBlockString ?: ' ');
     }
 }
