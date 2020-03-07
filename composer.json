@@ -23,7 +23,7 @@
     "nikic/php-parser": "^4.0",
     "phpdocumentor/reflection": "^4.0.0-beta",
     "phpdocumentor/reflection-docblock": "^5.0.0-alpha5",
-    "spaceonfire/collection": "~1.2.0",
+    "spaceonfire/collection": "^1.2.0",
     "symfony/console": "^4.3.5",
     "symfony/filesystem": "^4.3.5",
     "symfony/finder": "^4.3.5"
