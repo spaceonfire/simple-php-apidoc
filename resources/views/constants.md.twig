@@ -1,0 +1,13 @@
+{%- extends 'layout.md.twig' -%}
+
+{%- from '_constant_macros.md.twig' import constant -%}
+
+{% block main %}
+{{- (project_name ~ ' ' ~ 'constants'|trans)|md_heading }}
+{%- for constant in element %}
+
+
+    {{~ constant(constant, current_fqsen, 2) }}
+{%- endfor %}
+
+{% endblock %}

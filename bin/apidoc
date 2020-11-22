@@ -1,41 +1,103 @@
 #!/usr/bin/env php
 <?php
 
-use spaceonfire\SimplePhpApiDoc\GeneratorCommand;
+declare(strict_types=1);
+
+namespace spaceonfire\ApiDoc;
+
+use spaceonfire\ApiDoc\Application\ApiDocKernel;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
-function findProjectRoot($dir = __DIR__)
+\error_reporting(\E_ALL);
+\ini_set('display_errors', 'stderr');
+\gc_disable();
+
+$autoloadInclude = new IncludeAutoload();
+
+if (false !== $pharName = \Phar::running()) {
+    $autoloadInclude->seekInDirectory($pharName);
+} else {
+    $autoloadInclude->seekRecursivelyFrom(dirname(__DIR__));
+    $autoloadInclude->seekInWorkingDirectory();
+}
+
+$kernel = new ApiDocKernel();
+
+$kernel->configureConsoleApplication(
+    $app = new Application(),
+    $input = new ArgvInput(),
+    $output = new ConsoleOutput()
+);
+
+$exitCode = $app->run($input, $output);
+
+exit(max(min($exitCode, 255), 0));
+
+final class IncludeAutoload
 {
-    static $explored = [];
+    private const AUTOLOADER_NAME = '/vendor/autoload.php';
 
-    if (in_array($dir, $explored, true)) {
-        try {
-            throw new RuntimeException('Cannot find composer installation');
-        } catch (Throwable $throwable) {
-            echo implode(PHP_EOL, [
-                $throwable->getMessage(),
-                $throwable->getTraceAsString()
-            ]);
-            exit(1);
+    private $once;
+    private $included = [];
+
+    public function __construct(bool $once = true)
+    {
+        $this->once = $once;
+    }
+
+    public function seekInDirectory(string $dir): void
+    {
+        if ($this->once && count($this->included) > 0) {
+            return;
+        }
+
+        if (is_file($filename = $dir . self::AUTOLOADER_NAME)) {
+            $this->loadIfNotLoadedYet($filename, __METHOD__ . '() on line ' . __LINE__);
         }
     }
 
-    $explored[] = $dir;
-
-    if (file_exists($fileName = $dir . '/vendor/autoload.php')) {
-        return $dir;
+    public function seekInWorkingDirectory(): void
+    {
+        $this->seekInDirectory(getcwd());
     }
 
-    return findProjectRoot(dirname($dir));
+    public function seekRecursivelyFrom(string $dir): void
+    {
+        if ($this->once && count($this->included) > 0) {
+            return;
+        }
+
+        static $entered = [];
+
+        if (in_array($dir, $entered, true)) {
+            throw new \RuntimeException('Cannot find autoloader');
+        }
+
+        $entered[] = $dir;
+
+        if (is_file($filename = $dir . self::AUTOLOADER_NAME)) {
+            $this->loadIfNotLoadedYet($filename, __METHOD__ . '() on line ' . __LINE__);
+            return;
+        }
+
+        $this->seekRecursivelyFrom(dirname($dir));
+    }
+
+    private function loadIfNotLoadedYet(string $file, string $location): void
+    {
+        if ($this->isDebugOption()) {
+            echo sprintf('File "%s" is about to be loaded in "%s"' . PHP_EOL, $file, $location);
+        }
+
+        $this->included[] = $file;
+
+        require_once $file;
+    }
+
+    private function isDebugOption(): bool
+    {
+        return !empty(array_intersect($_SERVER['argv'], ['-vvv', '--debug']));
+    }
 }
-
-$root = findProjectRoot();
-
-require $root . '/vendor/autoload.php';
-
-$composer = json_decode(file_get_contents($root . '/composer.json'), true);
-
-$application = new Application();
-$command = $application->add(new GeneratorCommand($composer));
-$application->setDefaultCommand($command->getName(), true);
-$application->run();

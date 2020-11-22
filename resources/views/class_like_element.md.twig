@@ -1,0 +1,16 @@
+{%- extends 'layout.md.twig' -%}
+
+{%- import '_macros.md.twig' as macros -%}
+{%- from '_class_macros.md.twig' import class_members_table, class_properties -%}
+{%- from '_constant_macros.md.twig' import class_constants -%}
+{%- from '_function_macros.md.twig' import class_methods -%}
+
+{% block main %}
+{%- block element_header '' -%}
+{{- class_members_table(element) }}
+{{- class_constants(element) }}
+{{- class_properties(element) }}
+{{- class_properties(element, 'magicProperties', 2, 'Magic properties'|trans) }}
+{{- class_methods(element) }}
+{{- class_methods(element, 'magicMethods', 2, 'Magic methods'|trans) }}
+{% endblock %}

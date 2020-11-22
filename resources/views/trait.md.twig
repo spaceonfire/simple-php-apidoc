@@ -1,0 +1,37 @@
+{%- extends 'class_like_element.md.twig' -%}
+
+{%- import '_macros.md.twig' as macros -%}
+
+{% block element_header %}
+{{- ('Trait'|trans ~ ' ' ~ element.name.shortName)|md_heading }}
+{{- macros.deprecated(element.deprecated, 'trait'|trans) }}
+{%- if element.summary is not empty %}
+
+
+    {{~ element.summary }}
+{%- endif %}
+{%- if element.description is not empty %}
+
+
+    {{~ element.description }}
+{%- endif %}
+
+
+{{~ 'Full class name'|trans ~ ': ' ~ element.name|md_code }}
+{%- if element.parents|length > 0 %}
+    {%- if element.parents|length > 1 %}
+
+
+        {{~ 'This trait uses'|trans ~ ':' }}
+        {%~ for parent in element.parents %}
+
+            {{~ '- ' ~ parent.name|md_code }}
+        {%- endfor -%}
+    {%- else %}
+
+
+        {{~ 'This trait uses'|trans ~ ': ' ~ (element.parents|first).name|md_code }}
+    {%- endif -%}
+{%- endif %}
+{{- macros.examples_list(element.examples) -}}
+{% endblock %}

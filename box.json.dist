@@ -1,0 +1,15 @@
+{
+  "alias": "apidoc.phar",
+  "force-autodiscovery": true,
+  "dump-autoload": true,
+  "directories": [
+    "resources",
+    "vendor/twig/twig/src/Node/Expression/Test"
+  ],
+  "files": [
+    "vendor/twig/twig/src/TwigTest.php"
+  ],
+  "compactors": [
+    "KevinGH\\Box\\Compactor\\PhpScoper"
+  ]
+}
