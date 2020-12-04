@@ -1,0 +1,21 @@
+{%- extends 'layout.md.twig' -%}
+
+{%- import '_macros.md.twig' as macros -%}
+
+{% block main %}
+{{- (project_name ~ ' ' ~ 'API documentation'|trans)|md_heading }}
+{{~ '' }}
+{%- for namespace, groups in element %}
+
+    {{~ '- ' ~ namespace }}
+    {%- for type, links in groups %}
+
+        {{~ ('- ' ~ type|trans)|md_indent(4) }}
+        {%- for link in links %}
+
+            {{~ ('- ' ~ link.text|md_link(resolve_link(link, current_fqsen)))|md_indent(8) }}
+        {%- endfor -%}
+    {%- endfor -%}
+{%- endfor -%}
+{{~ '' }}
+{% endblock %}

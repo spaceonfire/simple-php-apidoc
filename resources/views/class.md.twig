@@ -1,0 +1,57 @@
+{%- extends 'class_like_element.md.twig' -%}
+
+{%- import '_macros.md.twig' as macros -%}
+
+{% block element_header %}
+{{- ('Class'|trans ~ ' ' ~ element.name.shortName)|md_heading }}
+{{- macros.deprecated(element.deprecated, 'class'|trans) }}
+{%- if element.summary is not empty %}
+
+
+    {{~ element.summary }}
+{%- endif %}
+{%- if element.description is not empty %}
+
+
+    {{~ element.description }}
+{%- endif %}
+
+
+{{~ 'Full class name'|trans ~ ': ' ~ element.name|md_code }}
+{%- if element.parent is not same as(null) %}
+
+
+    {{~ 'Parent class name'|trans ~ ': ' ~ element.parent.name|md_code }}
+{%- endif %}
+{%- if element.interfaces|length > 0 %}
+    {%- if element.interfaces|length > 1 %}
+
+
+        {{~ 'This class implements'|trans ~ ':' }}
+        {%~ for interface in element.interfaces %}
+
+            {{~ '- ' ~ interface.name|md_code }}
+        {%- endfor -%}
+    {%- else %}
+
+
+        {{~ 'This class implements'|trans ~ ': ' ~ (element.interfaces|first).name|md_code }}
+    {%- endif -%}
+{%- endif %}
+{%- if element.traits|length > 0 %}
+    {%- if element.traits|length > 1 %}
+
+
+        {{~ 'This class uses'|trans ~ ':' }}
+        {%~ for trait in element.traits %}
+
+            {{~ '- ' ~ trait.name|md_code }}
+        {%- endfor -%}
+    {%- else %}
+
+
+        {{~ 'This class uses'|trans ~ ': ' ~ (element.traits|first).name|md_code }}
+    {%- endif -%}
+{%- endif %}
+{{- macros.examples_list(element.examples) -}}
+{% endblock %}

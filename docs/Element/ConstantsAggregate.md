@@ -1,0 +1,99 @@
+# Class ConstantsAggregate
+
+Class ConstantsAggregate
+
+Full name: `spaceonfire\ApiDoc\Element\ConstantsAggregate`
+
+This class implements:
+
+-   `spaceonfire\ApiDoc\Element\ElementInterface`
+-   `IteratorAggregate`
+-   `Traversable`
+-   `Countable`
+
+## Class members
+
+| Name                                                                      | Type                                                                                                                          | Summary                       | Additional                   |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ---------------------------- |
+| _Methods_                                                                 |                                                                                                                               |                               |                              |
+| [\_\_construct](#spaceonfire_apidoc_element_constantsaggregate_construct) |                                                                                                                               |                               | [📢](# "Visibility: public") |
+| [getFqsen](#spaceonfire_apidoc_element_constantsaggregate_getfqsen)       | _spaceonfire\ApiDoc\Element\ValueObject\Fqsen_                                                                                | Getter for `fqsen` property.  | [📢](# "Visibility: public") |
+| [getIterator](#spaceonfire_apidoc_element_constantsaggregate_getiterator) | _ArrayIterator<int&#124;string,spaceonfire\ApiDoc\Element\ConstantElement>&#124;spaceonfire\ApiDoc\Element\ConstantElement[]_ | Retrieve an external iterator | [📢](# "Visibility: public") |
+| [count](#spaceonfire_apidoc_element_constantsaggregate_count)             | _int_                                                                                                                         | Count elements of an object   | [📢](# "Visibility: public") |
+
+## Methods
+
+<a name="spaceonfire_apidoc_element_constantsaggregate_construct"></a>
+
+### \_\_construct()
+
+-   **Visibility**: public
+
+| Param                  | Type                                         | Reference | Description |
+| ---------------------- | -------------------------------------------- | --------- | ----------- |
+| `...$constantElements` | _spaceonfire\ApiDoc\Element\ConstantElement_ | No        |             |
+
+```php
+public function __construct(spaceonfire\ApiDoc\Element\ConstantElement ...$constantElements)
+```
+
+File location: `Element/ConstantsAggregate.php:25`
+
+<a name="spaceonfire_apidoc_element_constantsaggregate_getfqsen"></a>
+
+### getFqsen()
+
+Getter for `fqsen` property.
+
+-   **Visibility**: public
+
+| Param      | Type                                           | Reference | Description |
+| ---------- | ---------------------------------------------- | --------- | ----------- |
+| **Return** | _spaceonfire\ApiDoc\Element\ValueObject\Fqsen_ |           |             |
+
+```php
+public function getFqsen(): spaceonfire\ApiDoc\Element\ValueObject\Fqsen
+```
+
+File location: `Element/ConstantsAggregate.php:35`
+
+<a name="spaceonfire_apidoc_element_constantsaggregate_getiterator"></a>
+
+### getIterator()
+
+Retrieve an external iterator
+
+-   **Visibility**: public
+
+| Param      | Type                                                                                                                          | Reference | Description |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ----------- |
+| **Return** | _ArrayIterator<int&#124;string,spaceonfire\ApiDoc\Element\ConstantElement>&#124;spaceonfire\ApiDoc\Element\ConstantElement[]_ |           |             |
+| **Throws** | _Exception_                                                                                                                   |           | on failure. |
+
+```php
+public function getIterator(): ArrayIterator<int|string,spaceonfire\ApiDoc\Element\ConstantElement>|spaceonfire\ApiDoc\Element\ConstantElement[]
+```
+
+File location: `Element/ConstantsAggregate.php:44`
+
+<a name="spaceonfire_apidoc_element_constantsaggregate_count"></a>
+
+### count()
+
+Count elements of an object
+
+-   **Visibility**: public
+
+| Param      | Type  | Reference | Description                                                                               |
+| ---------- | ----- | --------- | ----------------------------------------------------------------------------------------- |
+| **Return** | _int_ |           | The custom count as an integer.<br></p><br><p><br>The return value is cast to an integer. |
+
+```php
+public function count(): int
+```
+
+File location: `Element/ConstantsAggregate.php:52`
+
+---
+
+This file automatically generated by [SpaceOnFire ApiDoc](https://github.com/spaceonfire/apidoc)

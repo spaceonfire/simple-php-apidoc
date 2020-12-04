@@ -1,0 +1,98 @@
+{%- macro class_methods(class_like_element, property = 'methods', heading_level = 2, title = null) -%}
+    {%- set methods = attribute(class_like_element, property) -%}
+
+    {%- if methods|length > 0 %}
+
+
+        {{~ (title ?? 'Methods'|trans)|md_heading(heading_level) }}
+        {%- for method in methods %}
+
+
+            {{~ _self.function(method, class_like_element, heading_level + 1, 'method') }}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro function(function, current_fqsen, heading_level, deprecated_type = 'function') -%}
+    {%- from '_macros.md.twig' import anchor, deprecated, type, signatrure, examples_list, links_list, location -%}
+    {{~ anchor(function.name) }}
+    {{~ ((function.name.prefixedWithClassName ? function.name.withoutClassName : function.name) ~ '()')|md_heading(heading_level) }}
+    {{- deprecated(function.deprecated, deprecated_type|trans) }}
+    {%- if function.summary is not empty %}
+
+
+        {{~ function.summary }}
+    {%- endif %}
+    {%- if function.description is not empty %}
+
+
+        {{~ function.description }}
+    {%- endif %}
+    {{~ '' }}
+
+    {%- if function.abstract is defined or function.final is defined or function.visibility is defined or function.static is defined %}
+        {{~ '' }}
+        {{~ '' }}
+
+        {%- if function.abstract %}
+
+            {{~ '- ' ~ 'Abstract method'|trans|md_bold ~ ': ' ~ 'Yes'|trans }}
+        {%- endif -%}
+        {%- if function.final %}
+
+            {{~ '- ' ~ 'Final method'|trans|md_bold ~ ': ' ~ 'Yes'|trans }}
+        {%- endif -%}
+        {%- if function.visibility %}
+
+            {{~ '- ' ~ 'Visibility'|trans|md_bold ~ ': ' ~ function.visibility }}
+        {%- endif -%}
+        {%- if function.static %}
+
+            {{~ '- ' ~ 'Static'|trans|md_bold ~ ': ' ~ (function.static ? 'Yes'|trans : 'No'|trans) }}
+        {%- endif -%}
+    {%- endif -%}
+
+    {{- _self.function_params_table(function) }}
+    {{- signatrure(function) }}
+    {{- examples_list(function.examples) }}
+    {{- links_list(function.links, current_fqsen) }}
+    {{- location(function.location) }}
+{%- endmacro -%}
+
+{%- macro function_params_table(function) -%}
+    {%- from '_macros.md.twig' import type -%}
+
+    {%- if function.parameters|length > 0 or function.return is not empty or function.throws|length > 0 %}
+
+
+        {{~ ['Param'|trans, 'Type'|trans, 'Reference'|trans, 'Description'|trans]|md_table_row }}
+        {{~ ['-----', '----', '---------', '-----------']|md_table_row }}
+        {%- for paramater in function.parameters %}
+
+            {{~ [
+                ((paramater.variadic ? '...' : '') ~ '$' ~ paramater.name)|md_code,
+                paramater.type ? type(paramater.type) : '',
+                paramater.passedByReference ? 'Yes'|trans : 'No'|trans,
+                paramater.description is not empty ? paramater.description : '',
+            ]|md_table_row -}}
+        {%- endfor -%}
+        {%- if function.return is not same as(null) %}
+
+            {{~ [
+                'Return'|trans|md_bold,
+                type(function.return.type, 'void'),
+                '',
+                function.return.description is not empty ? function.return.description : '',
+            ]|md_table_row -}}
+        {%- endif -%}
+        {%- for throw in function.throws %}
+
+            {{~ [
+                'Throws'|trans|md_bold,
+                throw.type ? type(throw.type) : '',
+                '',
+                throw.description is not empty ? throw.description : '',
+            ]|md_table_row -}}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}

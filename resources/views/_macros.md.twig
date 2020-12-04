@@ -1,0 +1,101 @@
+{%- macro location(location) -%}
+    {%- if location is not same as(null) %}
+
+
+        {{~ 'File location'|trans ~ ': ' ~ (location.filename ~ ':' ~ location.lineNumber)|md_code }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro deprecated(reason, type) -%}
+    {%- if reason is not same as(false) %}
+
+
+        {{~ '**Warning:** this %type% is *deprecated*.'|trans({'%type%' : type}) }} {{
+            reason is same as(true)
+                ? 'This means it will likely be removed in a future major version.'|trans
+                : reason
+        }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro anchor(name) -%}
+    {{~ '<a name="' ~ anchor(name) ~ '"></a>' }}
+{%- endmacro -%}
+
+{%- macro type(type, default = null) -%}
+    {{~ type or default ? (type ?? default)|md_italic : '' }}
+{%- endmacro -%}
+
+{%- macro visibility_emoji(visibility, anchor = '') -%}
+    {%- if visibility == 'private' -%}
+        {{~ '🔒'|md_link('#' ~ anchor, 'Visibility'|trans ~ ': ' ~ 'private') }}
+    {%- elseif visibility == 'protected' -%}
+        {{~ '🛡'|md_link('#' ~ anchor, 'Visibility'|trans ~ ': ' ~ 'protected') }}
+    {%- else -%}
+        {{~ '📢'|md_link('#' ~ anchor, 'Visibility'|trans ~ ': ' ~ 'public') }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro deprecated_emoji(reason, anchor = '') -%}
+    {% if reason is not same as(false) -%}
+        {{~ '⚠'|md_link('#' ~ anchor, 'Deprecated functionality'|trans) }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro static_emoji(show, anchor = '') -%}
+    {% if show -%}
+        {{~ '🇸'|md_link('#' ~ anchor, 'Static element'|trans) }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro abstract_emoji(show, anchor = '') -%}
+    {% if show -%}
+        {{~ '🇦'|md_link('#' ~ anchor, 'Abstract element'|trans) }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro final_emoji(show, anchor = '') -%}
+    {% if show -%}
+        {{~ '📌'|md_link('#' ~ anchor, 'Final element'|trans) }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro signatrure(element) -%}
+    {%- set signature = signature(element) -%}
+    {%- if signature is not same as(null) %}
+
+
+        {{~ signature|md_pre(signature.language ?? '') }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro links_list(links, from = null) -%}
+    {%- if links|length > 0 %}
+
+
+        {{~ 'Links'|trans|md_bold ~ ':' }}
+        {%~ for link in links %}
+
+            {{~ '- ' ~ link.text|md_link(resolve_link(link, from)) ~ (link.description ? ': ' ~ link.description : '') }}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro examples_list(examples) -%}
+    {%- if examples|length > 0 %}
+
+
+        {{~ 'Examples'|trans|md_bold ~ ':' }}
+        {%- for example in examples %}
+            {%- set snippet = example_code_snippet(example) %}
+
+
+            {{~ '- ' ~ (example.uri ? example.uri|md_link(example.uri) : example.filePath|md_code) ~ (example.description ? ': ' ~ example.description : '') }}
+            {%- if snippet is not empty %}
+
+
+                {{~ snippet|md_pre(snippet.language ?? '') }}
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}

@@ -1,0 +1,136 @@
+{%- macro class_properties(class_like_element, property = 'properties', heading_level = 2, title = null) -%}
+    {%- from '_macros.md.twig' import anchor, deprecated, type, signatrure, examples_list, links_list, location -%}
+    {%- set properties = attribute(class_like_element, property) -%}
+
+    {%- if properties|length > 0 %}
+
+
+        {{~ (title ?? 'Properties'|trans)|md_heading(heading_level) }}
+        {%- for property in properties %}
+
+
+            {{~ anchor(property.name) }}
+            {{~ property.name.withoutClassName|md_heading(heading_level + 1) }}
+            {{- deprecated(property.deprecated, 'property'|trans) }}
+            {%- if property.summary is not empty %}
+
+
+                {{~ property.summary }}
+            {%- endif %}
+            {%- if property.description is not empty %}
+
+
+                {{~ property.description }}
+            {%- endif %}
+
+
+            {{~ '- ' ~ 'Visibility'|trans|md_bold ~ ': ' ~ property.visibility }}
+            {{~ '- ' ~ 'Static'|trans|md_bold ~ ': ' ~ (property.static ? 'Yes'|trans : 'No'|trans) }}
+            {{~ '- ' ~ 'Type'|trans|md_bold ~ ': ' ~ type(property.type, 'mixed') }}
+            {{~ '- ' ~ 'Default value'|trans|md_bold ~ ': ' ~ (property.defaultValue ? property.defaultValue.value|export|md_oneline|md_code : 'none'|trans) }}
+
+            {{- signatrure(property) }}
+            {{- examples_list(property.examples) }}
+            {{- links_list(property.links, class_like_element) }}
+            {{- location(property.location) }}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro class_members_table(element) -%}
+    {%- import '_macros.md.twig' as macros %}
+
+
+    {{~ 'Class members'|trans|md_heading(2) }}
+
+    {{~ ['Name'|trans, 'Type'|trans, 'Summary'|trans, 'Additional'|trans]|md_table_row }}
+    {{~ ['----', '----', '-------', '----------']|md_table_row }}
+    {%- if element.constants is defined and element.constants|length > 0 %}
+
+        {{~ ['Constants'|trans|md_italic, '', '', '']|md_table_row }}
+        {%- for constant in element.constants %}
+
+            {{~ [
+                constant.name.withoutClassName|md_link('#' ~ anchor(constant.name)),
+                '',
+                constant.summary,
+                [
+                    macros.visibility_emoji(constant.visibility),
+                    macros.deprecated_emoji(constant.deprecated),
+                ]|join(' '),
+            ]|md_table_row }}
+        {%- endfor -%}
+    {%- endif -%}
+    {%- if element.properties is defined and element.properties|length > 0 %}
+
+        {{~ ['Properties'|trans|md_italic, '', '', '']|md_table_row }}
+        {%- for property in element.properties %}
+
+            {{~ [
+                property.name.withoutClassName|md_link('#' ~ anchor(property.name)),
+                macros.type(property.type, 'mixed'),
+                property.summary,
+                [
+                    macros.static_emoji(property.static),
+                    macros.visibility_emoji(property.visibility),
+                    macros.deprecated_emoji(property.deprecated),
+                ]|join(' '),
+            ]|md_table_row }}
+        {%- endfor -%}
+    {%- endif -%}
+    {%- if element.magicProperties is defined and element.magicProperties|length > 0 %}
+
+        {{~ ['Magic properties'|trans|md_italic, '', '', '']|md_table_row }}
+        {%- for magicProperty in element.magicProperties %}
+
+            {{~ [
+                magicProperty.name.withoutClassName|md_link('#' ~ anchor(magicProperty.name)),
+                macros.type(magicProperty.type, 'mixed'),
+                magicProperty.summary,
+                [
+                    macros.static_emoji(magicProperty.static),
+                    macros.visibility_emoji(magicProperty.visibility),
+                    macros.deprecated_emoji(magicProperty.deprecated),
+                ]|join(' '),
+            ]|md_table_row }}
+        {%- endfor -%}
+    {%- endif -%}
+    {%- if element.methods is defined and element.methods|length > 0 %}
+
+        {{~ ['Methods'|trans|md_italic, '', '', '']|md_table_row }}
+        {%- for method in element.methods %}
+
+            {{~ [
+                method.name.withoutClassName|md_link('#' ~ anchor(method.name)),
+                method.return ? macros.type(method.return.type, 'void') : '',
+                method.summary,
+                [
+                    macros.final_emoji(method.final),
+                    macros.abstract_emoji(method.abstract),
+                    macros.static_emoji(method.static),
+                    macros.visibility_emoji(method.visibility),
+                    macros.deprecated_emoji(method.deprecated),
+                ]|join(' '),
+            ]|md_table_row }}
+        {%- endfor -%}
+    {%- endif -%}
+    {%- if element.magicMethods is defined and element.magicMethods|length > 0 %}
+
+        {{~ ['Magic methods'|trans|md_italic, '', '', '']|md_table_row }}
+        {%- for magicMethod in element.magicMethods %}
+
+            {{~ [
+                magicMethod.name.withoutClassName|md_link('#' ~ anchor(magicMethod.name)),
+                magicMethod.return ? macros.type(magicMethod.return.type, 'void') : '',
+                magicMethod.summary,
+                [
+                    macros.final_emoji(magicMethod.final),
+                    macros.abstract_emoji(magicMethod.abstract),
+                    macros.static_emoji(magicMethod.static),
+                    macros.visibility_emoji(magicMethod.visibility),
+                    macros.deprecated_emoji(magicMethod.deprecated),
+                ]|join(' '),
+            ]|md_table_row }}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}

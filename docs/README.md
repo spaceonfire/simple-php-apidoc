@@ -1,53 +1,176 @@
-# spaceonfire/simple-php-apidoc API Documentation
+# SpaceOnFire ApiDoc API documentation
 
-- [\spaceonfire\SimplePhpApiDoc](./spaceonfire/SimplePhpApiDoc)
-    - Classes
-        - [Context](./spaceonfire/SimplePhpApiDoc/Context.md)
-        - [GeneratorCommand](./spaceonfire/SimplePhpApiDoc/GeneratorCommand.md)
-- [\spaceonfire\SimplePhpApiDoc\Elements](./spaceonfire/SimplePhpApiDoc/Elements)
-    - Classes
-        - [ArgumentElement](./spaceonfire/SimplePhpApiDoc/Elements/ArgumentElement.md)
-        - [BaseElement](./spaceonfire/SimplePhpApiDoc/Elements/BaseElement.md)
-        - [ClassElement](./spaceonfire/SimplePhpApiDoc/Elements/ClassElement.md)
-        - [ConstantElement](./spaceonfire/SimplePhpApiDoc/Elements/ConstantElement.md)
-        - [FunctionElement](./spaceonfire/SimplePhpApiDoc/Elements/FunctionElement.md)
-        - [InterfaceElement](./spaceonfire/SimplePhpApiDoc/Elements/InterfaceElement.md)
-        - [MethodElement](./spaceonfire/SimplePhpApiDoc/Elements/MethodElement.md)
-        - [NamespaceElement](./spaceonfire/SimplePhpApiDoc/Elements/NamespaceElement.md)
-        - [PropertyElement](./spaceonfire/SimplePhpApiDoc/Elements/PropertyElement.md)
-        - [TraitElement](./spaceonfire/SimplePhpApiDoc/Elements/TraitElement.md)
-    - Interfaces
-        - [ElementDecoratorInterface](./spaceonfire/SimplePhpApiDoc/Elements/ElementDecoratorInterface.md)
-        - [ElementInterface](./spaceonfire/SimplePhpApiDoc/Elements/ElementInterface.md)
-        - [ElementVisibilityInterface](./spaceonfire/SimplePhpApiDoc/Elements/ElementVisibilityInterface.md)
-        - [MethodOwnerInterface](./spaceonfire/SimplePhpApiDoc/Elements/MethodOwnerInterface.md)
-        - [PropertyOwnerInterface](./spaceonfire/SimplePhpApiDoc/Elements/PropertyOwnerInterface.md)
-- [\spaceonfire\SimplePhpApiDoc\Elements\Collections](./spaceonfire/SimplePhpApiDoc/Elements/Collections)
-    - Classes
-        - [MethodsCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/MethodsCollection.md)
-        - [NamespacesCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/NamespacesCollection.md)
-        - [PropertiesCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/PropertiesCollection.md)
-        - [TraitsCollection](./spaceonfire/SimplePhpApiDoc/Elements/Collections/TraitsCollection.md)
-    - Interfaces
-        - [FilterableByVisibilityCollectionInterface](./spaceonfire/SimplePhpApiDoc/Elements/Collections/FilterableByVisibilityCollectionInterface.md)
-    - Traits
-        - [FilterableByVisibilityCollectionTrait](./spaceonfire/SimplePhpApiDoc/Elements/Collections/FilterableByVisibilityCollectionTrait.md)
-- [\spaceonfire\SimplePhpApiDoc\Elements\DocBlockResolver](./spaceonfire/SimplePhpApiDoc/Elements/DocBlockResolver)
-    - Classes
-        - [BaseDocBlockResolver](./spaceonfire/SimplePhpApiDoc/Elements/DocBlockResolver/BaseDocBlockResolver.md)
-        - [ClassDocBlockResolver](./spaceonfire/SimplePhpApiDoc/Elements/DocBlockResolver/ClassDocBlockResolver.md)
-        - [MethodDocBlockResolver](./spaceonfire/SimplePhpApiDoc/Elements/DocBlockResolver/MethodDocBlockResolver.md)
-        - [PropertyDocBlockResolver](./spaceonfire/SimplePhpApiDoc/Elements/DocBlockResolver/PropertyDocBlockResolver.md)
-- [\spaceonfire\SimplePhpApiDoc\Renderers](./spaceonfire/SimplePhpApiDoc/Renderers)
-    - Classes
-        - [BaseRenderer](./spaceonfire/SimplePhpApiDoc/Renderers/BaseRenderer.md)
-    - Interfaces
-        - [RendererInterface](./spaceonfire/SimplePhpApiDoc/Renderers/RendererInterface.md)
-- [\spaceonfire\SimplePhpApiDoc\Renderers\Markdown](./spaceonfire/SimplePhpApiDoc/Renderers/Markdown)
-    - Classes
-        - [MarkdownHelper](./spaceonfire/SimplePhpApiDoc/Renderers/Markdown/MarkdownHelper.md)
-        - [MarkdownRenderer](./spaceonfire/SimplePhpApiDoc/Renderers/Markdown/MarkdownRenderer.md)
+-   spaceonfire\ApiDoc\Application
+    -   Classes
+        -   [spaceonfire\ApiDoc\Application\ApiDocKernel](Application/ApiDocKernel.md#spaceonfire_apidoc_application_apidockernel)
+-   spaceonfire\ApiDoc\Application\Console
+    -   Classes
+        -   [spaceonfire\ApiDoc\Application\Console\GenerateCommand](Application/Console/GenerateCommand.md#spaceonfire_apidoc_application_console_generatecommand)
+-   spaceonfire\ApiDoc\Application\ServiceProviders
+    -   Classes
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\ConfigProvider](Application/ServiceProviders/ConfigProvider.md#spaceonfire_apidoc_application_serviceproviders_configprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\ConsoleCommandsProvider](Application/ServiceProviders/ConsoleCommandsProvider.md#spaceonfire_apidoc_application_serviceproviders_consolecommandsprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\DefaultApiDocGeneratorProvider](Application/ServiceProviders/DefaultApiDocGeneratorProvider.md#spaceonfire_apidoc_application_serviceproviders_defaultapidocgeneratorprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\DefaultRendererProvider](Application/ServiceProviders/DefaultRendererProvider.md#spaceonfire_apidoc_application_serviceproviders_defaultrendererprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\DocBlockResolverProvider](Application/ServiceProviders/DocBlockResolverProvider.md#spaceonfire_apidoc_application_serviceproviders_docblockresolverprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\ElementFactoryProvider](Application/ServiceProviders/ElementFactoryProvider.md#spaceonfire_apidoc_application_serviceproviders_elementfactoryprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\FallbackBetterReflectionProvider](Application/ServiceProviders/FallbackBetterReflectionProvider.md#spaceonfire_apidoc_application_serviceproviders_fallbackbetterreflectionprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\LinkServiceProvider](Application/ServiceProviders/LinkServiceProvider.md#spaceonfire_apidoc_application_serviceproviders_linkserviceprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\SignatureRendererProvider](Application/ServiceProviders/SignatureRendererProvider.md#spaceonfire_apidoc_application_serviceproviders_signaturerendererprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\TranslatorProvider](Application/ServiceProviders/TranslatorProvider.md#spaceonfire_apidoc_application_serviceproviders_translatorprovider)
+        -   [spaceonfire\ApiDoc\Application\ServiceProviders\TypeFactoryProvider](Application/ServiceProviders/TypeFactoryProvider.md#spaceonfire_apidoc_application_serviceproviders_typefactoryprovider)
+-   spaceonfire\ApiDoc\Config
+    -   Classes
+        -   [spaceonfire\ApiDoc\Config\Config](Config/Config.md#spaceonfire_apidoc_config_config)
+-   spaceonfire\ApiDoc\Config\Processor
+    -   Classes
+        -   [spaceonfire\ApiDoc\Config\Processor\BuilderProcessor](Config/Processor/BuilderProcessor.md#spaceonfire_apidoc_config_processor_builderprocessor)
+        -   [spaceonfire\ApiDoc\Config\Processor\ComposerJsonProcessor](Config/Processor/ComposerJsonProcessor.md#spaceonfire_apidoc_config_processor_composerjsonprocessor)
+        -   [spaceonfire\ApiDoc\Config\Processor\ConfigFileProcessor](Config/Processor/ConfigFileProcessor.md#spaceonfire_apidoc_config_processor_configfileprocessor)
+        -   [spaceonfire\ApiDoc\Config\Processor\ConsoleInputProcessor](Config/Processor/ConsoleInputProcessor.md#spaceonfire_apidoc_config_processor_consoleinputprocessor)
+        -   [spaceonfire\ApiDoc\Config\Processor\DefaultsProcessor](Config/Processor/DefaultsProcessor.md#spaceonfire_apidoc_config_processor_defaultsprocessor)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Config\Processor\ProcessorInterface](Config/Processor/ProcessorInterface.md#spaceonfire_apidoc_config_processor_processorinterface)
+-   spaceonfire\ApiDoc\Element
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\AbstractElement](Element/AbstractElement.md#spaceonfire_apidoc_element_abstractelement)
+        -   [spaceonfire\ApiDoc\Element\ClassElement](Element/ClassElement.md#spaceonfire_apidoc_element_classelement)
+        -   [spaceonfire\ApiDoc\Element\ConstantElement](Element/ConstantElement.md#spaceonfire_apidoc_element_constantelement)
+        -   [spaceonfire\ApiDoc\Element\ConstantsAggregate](Element/ConstantsAggregate.md#spaceonfire_apidoc_element_constantsaggregate)
+        -   [spaceonfire\ApiDoc\Element\FunctionElement](Element/FunctionElement.md#spaceonfire_apidoc_element_functionelement)
+        -   [spaceonfire\ApiDoc\Element\FunctionsAggregate](Element/FunctionsAggregate.md#spaceonfire_apidoc_element_functionsaggregate)
+        -   [spaceonfire\ApiDoc\Element\InterfaceElement](Element/InterfaceElement.md#spaceonfire_apidoc_element_interfaceelement)
+        -   [spaceonfire\ApiDoc\Element\MethodElement](Element/MethodElement.md#spaceonfire_apidoc_element_methodelement)
+        -   [spaceonfire\ApiDoc\Element\PropertyElement](Element/PropertyElement.md#spaceonfire_apidoc_element_propertyelement)
+        -   [spaceonfire\ApiDoc\Element\TableOfContentsElement](Element/TableOfContentsElement.md#spaceonfire_apidoc_element_tableofcontentselement)
+        -   [spaceonfire\ApiDoc\Element\TraitElement](Element/TraitElement.md#spaceonfire_apidoc_element_traitelement)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\ElementInterface](Element/ElementInterface.md#spaceonfire_apidoc_element_elementinterface)
+-   spaceonfire\ApiDoc\Element\DocBlock
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\DocBlock\DocBlock](Element/DocBlock/DocBlock.md#spaceonfire_apidoc_element_docblock_docblock)
+-   spaceonfire\ApiDoc\Element\DocBlock\Factory
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Factory\DocBlockFactory](Element/DocBlock/Factory/DocBlockFactory.md#spaceonfire_apidoc_element_docblock_factory_docblockfactory)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Factory\DocBlockFactoryInterface](Element/DocBlock/Factory/DocBlockFactoryInterface.md#spaceonfire_apidoc_element_docblock_factory_docblockfactoryinterface)
+-   spaceonfire\ApiDoc\Element\DocBlock\Resolver
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\AbstractDocBlockResolver](Element/DocBlock/Resolver/AbstractDocBlockResolver.md#spaceonfire_apidoc_element_docblock_resolver_abstractdocblockresolver)
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\ClassDocBlockResolver](Element/DocBlock/Resolver/ClassDocBlockResolver.md#spaceonfire_apidoc_element_docblock_resolver_classdocblockresolver)
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\CompositeDocBlockResolver](Element/DocBlock/Resolver/CompositeDocBlockResolver.md#spaceonfire_apidoc_element_docblock_resolver_compositedocblockresolver)
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\DefaultDocBlockResolver](Element/DocBlock/Resolver/DefaultDocBlockResolver.md#spaceonfire_apidoc_element_docblock_resolver_defaultdocblockresolver)
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\DocBlockMerger](Element/DocBlock/Resolver/DocBlockMerger.md#spaceonfire_apidoc_element_docblock_resolver_docblockmerger)
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\MemoizedDocBlockResolver](Element/DocBlock/Resolver/MemoizedDocBlockResolver.md#spaceonfire_apidoc_element_docblock_resolver_memoizeddocblockresolver)
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\MethodDocBlockResolver](Element/DocBlock/Resolver/MethodDocBlockResolver.md#spaceonfire_apidoc_element_docblock_resolver_methoddocblockresolver)
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\PropertyDocBlockResolver](Element/DocBlock/Resolver/PropertyDocBlockResolver.md#spaceonfire_apidoc_element_docblock_resolver_propertydocblockresolver)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\DocBlock\Resolver\DocBlockResolverInterface](Element/DocBlock/Resolver/DocBlockResolverInterface.md#spaceonfire_apidoc_element_docblock_resolver_docblockresolverinterface)
+-   spaceonfire\ApiDoc\Element\Example
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Example\ExampleCodeSnippetResolver](Element/Example/ExampleCodeSnippetResolver.md#spaceonfire_apidoc_element_example_examplecodesnippetresolver)
+-   spaceonfire\ApiDoc\Element\Factory
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Factory\AbstractElementFactory](Element/Factory/AbstractElementFactory.md#spaceonfire_apidoc_element_factory_abstractelementfactory)
+        -   [spaceonfire\ApiDoc\Element\Factory\ClassLikeElementFactory](Element/Factory/ClassLikeElementFactory.md#spaceonfire_apidoc_element_factory_classlikeelementfactory)
+        -   [spaceonfire\ApiDoc\Element\Factory\CompositeElementFactory](Element/Factory/CompositeElementFactory.md#spaceonfire_apidoc_element_factory_compositeelementfactory)
+        -   [spaceonfire\ApiDoc\Element\Factory\ConstantElementFactory](Element/Factory/ConstantElementFactory.md#spaceonfire_apidoc_element_factory_constantelementfactory)
+        -   [spaceonfire\ApiDoc\Element\Factory\FunctionLikeElementFactory](Element/Factory/FunctionLikeElementFactory.md#spaceonfire_apidoc_element_factory_functionlikeelementfactory)
+        -   [spaceonfire\ApiDoc\Element\Factory\MemoizedElementFactory](Element/Factory/MemoizedElementFactory.md#spaceonfire_apidoc_element_factory_memoizedelementfactory)
+        -   [spaceonfire\ApiDoc\Element\Factory\PropertyElementFactory](Element/Factory/PropertyElementFactory.md#spaceonfire_apidoc_element_factory_propertyelementfactory)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\Factory\ElementFactoryInterface](Element/Factory/ElementFactoryInterface.md#spaceonfire_apidoc_element_factory_elementfactoryinterface)
+-   spaceonfire\ApiDoc\Element\Link
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Link\AnchorGenerator](Element/Link/AnchorGenerator.md#spaceonfire_apidoc_element_link_anchorgenerator)
+        -   [spaceonfire\ApiDoc\Element\Link\CompositeLinkResolver](Element/Link/CompositeLinkResolver.md#spaceonfire_apidoc_element_link_compositelinkresolver)
+        -   [spaceonfire\ApiDoc\Element\Link\ExternalLinkResolver](Element/Link/ExternalLinkResolver.md#spaceonfire_apidoc_element_link_externallinkresolver)
+        -   [spaceonfire\ApiDoc\Element\Link\FqsenLinkResolver](Element/Link/FqsenLinkResolver.md#spaceonfire_apidoc_element_link_fqsenlinkresolver)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\Link\LinkResolverInterface](Element/Link/LinkResolverInterface.md#spaceonfire_apidoc_element_link_linkresolverinterface)
+-   spaceonfire\ApiDoc\Element\Location
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Location\Location](Element/Location/Location.md#spaceonfire_apidoc_element_location_location)
+        -   [spaceonfire\ApiDoc\Element\Location\LocationFactory](Element/Location/LocationFactory.md#spaceonfire_apidoc_element_location_locationfactory)
+-   spaceonfire\ApiDoc\Element\Signature
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Signature\CompositeSignatureRenderer](Element/Signature/CompositeSignatureRenderer.md#spaceonfire_apidoc_element_signature_compositesignaturerenderer)
+        -   [spaceonfire\ApiDoc\Element\Signature\ConstantSignatureRenderer](Element/Signature/ConstantSignatureRenderer.md#spaceonfire_apidoc_element_signature_constantsignaturerenderer)
+        -   [spaceonfire\ApiDoc\Element\Signature\FunctionLikeElementSignatureRenderer](Element/Signature/FunctionLikeElementSignatureRenderer.md#spaceonfire_apidoc_element_signature_functionlikeelementsignaturerenderer)
+        -   [spaceonfire\ApiDoc\Element\Signature\PropertySignatureRenderer](Element/Signature/PropertySignatureRenderer.md#spaceonfire_apidoc_element_signature_propertysignaturerenderer)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\Signature\SignatureRendererInterface](Element/Signature/SignatureRendererInterface.md#spaceonfire_apidoc_element_signature_signaturerendererinterface)
+-   spaceonfire\ApiDoc\Element\Type
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Type\BetterReflectionInstanceOfType](Element/Type/BetterReflectionInstanceOfType.md#spaceonfire_apidoc_element_type_betterreflectioninstanceoftype)
+-   spaceonfire\ApiDoc\Element\Type\Converter
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Type\Converter\PhpDocTypeConverter](Element/Type/Converter/PhpDocTypeConverter.md#spaceonfire_apidoc_element_type_converter_phpdoctypeconverter)
+        -   [spaceonfire\ApiDoc\Element\Type\Converter\ReflectionTypeConverter](Element/Type/Converter/ReflectionTypeConverter.md#spaceonfire_apidoc_element_type_converter_reflectiontypeconverter)
+-   spaceonfire\ApiDoc\Element\Type\Factory
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Type\Factory\BetterReflectionInstanceOfTypeFactory](Element/Type/Factory/BetterReflectionInstanceOfTypeFactory.md#spaceonfire_apidoc_element_type_factory_betterreflectioninstanceoftypefactory)
+        -   [spaceonfire\ApiDoc\Element\Type\Factory\BetterReflectionParentFactory](Element/Type/Factory/BetterReflectionParentFactory.md#spaceonfire_apidoc_element_type_factory_betterreflectionparentfactory)
+-   spaceonfire\ApiDoc\Element\Type\Resolver
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\Type\Resolver\AbstractTypeResolver](Element/Type/Resolver/AbstractTypeResolver.md#spaceonfire_apidoc_element_type_resolver_abstracttyperesolver)
+        -   [spaceonfire\ApiDoc\Element\Type\Resolver\ArgumentTypeResolver](Element/Type/Resolver/ArgumentTypeResolver.md#spaceonfire_apidoc_element_type_resolver_argumenttyperesolver)
+        -   [spaceonfire\ApiDoc\Element\Type\Resolver\CompositeTypeResolver](Element/Type/Resolver/CompositeTypeResolver.md#spaceonfire_apidoc_element_type_resolver_compositetyperesolver)
+        -   [spaceonfire\ApiDoc\Element\Type\Resolver\FunctionReturnTypeResolver](Element/Type/Resolver/FunctionReturnTypeResolver.md#spaceonfire_apidoc_element_type_resolver_functionreturntyperesolver)
+        -   [spaceonfire\ApiDoc\Element\Type\Resolver\MemoizedTypeResolver](Element/Type/Resolver/MemoizedTypeResolver.md#spaceonfire_apidoc_element_type_resolver_memoizedtyperesolver)
+        -   [spaceonfire\ApiDoc\Element\Type\Resolver\PropertyTypeResolver](Element/Type/Resolver/PropertyTypeResolver.md#spaceonfire_apidoc_element_type_resolver_propertytyperesolver)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\Type\Resolver\TypeResolverInterface](Element/Type/Resolver/TypeResolverInterface.md#spaceonfire_apidoc_element_type_resolver_typeresolverinterface)
+-   spaceonfire\ApiDoc\Element\ValueObject
+    -   Classes
+        -   [spaceonfire\ApiDoc\Element\ValueObject\AbstractTypedSymbol](Element/ValueObject/AbstractTypedSymbol.md#spaceonfire_apidoc_element_valueobject_abstracttypedsymbol)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\ClassMembersVisibilityFilter](Element/ValueObject/ClassMembersVisibilityFilter.md#spaceonfire_apidoc_element_valueobject_classmembersvisibilityfilter)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\CodeSnippet](Element/ValueObject/CodeSnippet.md#spaceonfire_apidoc_element_valueobject_codesnippet)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\Example](Element/ValueObject/Example.md#spaceonfire_apidoc_element_valueobject_example)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\ExternalLink](Element/ValueObject/ExternalLink.md#spaceonfire_apidoc_element_valueobject_externallink)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\Fqsen](Element/ValueObject/Fqsen.md#spaceonfire_apidoc_element_valueobject_fqsen)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\FqsenLink](Element/ValueObject/FqsenLink.md#spaceonfire_apidoc_element_valueobject_fqsenlink)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\FunctionParameter](Element/ValueObject/FunctionParameter.md#spaceonfire_apidoc_element_valueobject_functionparameter)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\FunctionReturn](Element/ValueObject/FunctionReturn.md#spaceonfire_apidoc_element_valueobject_functionreturn)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\FunctionThrows](Element/ValueObject/FunctionThrows.md#spaceonfire_apidoc_element_valueobject_functionthrows)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\Value](Element/ValueObject/Value.md#spaceonfire_apidoc_element_valueobject_value)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\Visibility](Element/ValueObject/Visibility.md#spaceonfire_apidoc_element_valueobject_visibility)
+        -   [spaceonfire\ApiDoc\Element\ValueObject\VisibilityFilter](Element/ValueObject/VisibilityFilter.md#spaceonfire_apidoc_element_valueobject_visibilityfilter)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Element\ValueObject\LinkInterface](Element/ValueObject/LinkInterface.md#spaceonfire_apidoc_element_valueobject_linkinterface)
+-   spaceonfire\ApiDoc\Exception
+    -   Classes
+        -   [spaceonfire\ApiDoc\Exception\GivenReflectionNotSupported](Exception/GivenReflectionNotSupported.md#spaceonfire_apidoc_exception_givenreflectionnotsupported)
+        -   [spaceonfire\ApiDoc\Exception\TypeCannotBeConverted](Exception/TypeCannotBeConverted.md#spaceonfire_apidoc_exception_typecannotbeconverted)
+-   spaceonfire\ApiDoc\Generator
+    -   Classes
+        -   [spaceonfire\ApiDoc\Generator\ApiDocGenerator](Generator/ApiDocGenerator.md#spaceonfire_apidoc_generator_apidocgenerator)
+        -   [spaceonfire\ApiDoc\Generator\File](Generator/File.md#spaceonfire_apidoc_generator_file)
+        -   [spaceonfire\ApiDoc\Generator\FileNameStrategy](Generator/FileNameStrategy.md#spaceonfire_apidoc_generator_filenamestrategy)
+        -   [spaceonfire\ApiDoc\Generator\LocalFilesystemPersister](Generator/LocalFilesystemPersister.md#spaceonfire_apidoc_generator_localfilesystempersister)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Generator\FileNameStrategyInterface](Generator/FileNameStrategyInterface.md#spaceonfire_apidoc_generator_filenamestrategyinterface)
+        -   [spaceonfire\ApiDoc\Generator\GeneratorInterface](Generator/GeneratorInterface.md#spaceonfire_apidoc_generator_generatorinterface)
+        -   [spaceonfire\ApiDoc\Generator\PersisterInterface](Generator/PersisterInterface.md#spaceonfire_apidoc_generator_persisterinterface)
+-   spaceonfire\ApiDoc\Project
+    -   Classes
+        -   [spaceonfire\ApiDoc\Project\Project](Project/Project.md#spaceonfire_apidoc_project_project)
+        -   [spaceonfire\ApiDoc\Project\ProjectFactory](Project/ProjectFactory.md#spaceonfire_apidoc_project_projectfactory)
+-   spaceonfire\ApiDoc\Render
+    -   Classes
+        -   [spaceonfire\ApiDoc\Render\StaticListTemplateNameStrategy](Render/StaticListTemplateNameStrategy.md#spaceonfire_apidoc_render_staticlisttemplatenamestrategy)
+        -   [spaceonfire\ApiDoc\Render\TwigRenderer](Render/TwigRenderer.md#spaceonfire_apidoc_render_twigrenderer)
+    -   Interfaces
+        -   [spaceonfire\ApiDoc\Render\RendererInterface](Render/RendererInterface.md#spaceonfire_apidoc_render_rendererinterface)
+        -   [spaceonfire\ApiDoc\Render\TemplateNameStrategyInterface](Render/TemplateNameStrategyInterface.md#spaceonfire_apidoc_render_templatenamestrategyinterface)
+-   spaceonfire\ApiDoc\Render\Twig
+    -   Classes
+        -   [spaceonfire\ApiDoc\Render\Twig\DumpExtension](Render/Twig/DumpExtension.md#spaceonfire_apidoc_render_twig_dumpextension)
+        -   [spaceonfire\ApiDoc\Render\Twig\ExampleRendererExtension](Render/Twig/ExampleRendererExtension.md#spaceonfire_apidoc_render_twig_examplerendererextension)
+        -   [spaceonfire\ApiDoc\Render\Twig\LinkExtension](Render/Twig/LinkExtension.md#spaceonfire_apidoc_render_twig_linkextension)
+        -   [spaceonfire\ApiDoc\Render\Twig\MarkdownExtension](Render/Twig/MarkdownExtension.md#spaceonfire_apidoc_render_twig_markdownextension)
+        -   [spaceonfire\ApiDoc\Render\Twig\SignatureExtension](Render/Twig/SignatureExtension.md#spaceonfire_apidoc_render_twig_signatureextension)
 
 ---
 
-This file automatically generated by [Simple PHP ApiDoc](https://github.com/spaceonfire/simple-php-apidoc)
+This file automatically generated by [SpaceOnFire ApiDoc](https://github.com/spaceonfire/apidoc)
