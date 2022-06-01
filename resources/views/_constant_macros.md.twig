@@ -1,0 +1,41 @@
+{%- macro class_constants(class_like_element, property = 'constants', heading_level = 2, title = null) -%}
+    {%- set constants = attribute(class_like_element, property) -%}
+
+    {%- if constants|length > 0 %}
+
+
+        {{~ (title ?? 'Constants'|trans)|md_heading(heading_level) }}
+        {%- for constant in constants %}
+
+
+            {{~ _self.constant(constant, class_like_element, heading_level + 1) }}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro constant(constant, current_fqsen, heading_level) -%}
+    {%- from '_macros.md.twig' import anchor, deprecated, examples_list, links_list, location -%}
+    {{~ anchor(constant.name) }}
+    {{~ (constant.name.prefixedWithClassName ? constant.name.withoutClassName : constant.name)|md_heading(heading_level) }}
+    {{- deprecated(constant.deprecated, 'constant'|trans) }}
+    {%- if constant.summary is not empty %}
+
+
+        {{~ constant.summary }}
+    {%- endif %}
+    {%- if constant.description is not empty %}
+
+
+        {{~ constant.description }}
+    {%- endif %}
+
+
+    {%~ if constant.visibility is not empty %}
+        {{~ '- ' ~ 'Visibility'|trans|md_bold ~ ': ' ~ constant.visibility }}
+    {%- endif %}
+
+    {{~ '- ' ~ 'Value'|trans|md_bold ~ ': ' ~ constant.value.value|export|md_oneline|md_code }}
+    {{- examples_list(constant.examples) }}
+    {{- links_list(constant.links, current_fqsen) }}
+    {{- location(constant.location) }}
+{%- endmacro -%}

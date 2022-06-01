@@ -1,0 +1,13 @@
+{%- extends 'layout.md.twig' -%}
+
+{%- from '_function_macros.md.twig' import function -%}
+
+{% block main %}
+{{- (project_name ~ ' ' ~ 'functions'|trans)|md_heading }}
+{%- for function in element %}
+
+
+    {{~ function(function, current_fqsen, 2) }}
+{%- endfor %}
+
+{% endblock %}

@@ -1,0 +1,99 @@
+# Class FunctionsAggregate
+
+Class FunctionsAggregate
+
+Full name: `spaceonfire\ApiDoc\Element\FunctionsAggregate`
+
+This class implements:
+
+-   `spaceonfire\ApiDoc\Element\ElementInterface`
+-   `IteratorAggregate`
+-   `Traversable`
+-   `Countable`
+
+## Class members
+
+| Name                                                                      | Type                                                                                                                          | Summary                       | Additional                   |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ---------------------------- |
+| _Methods_                                                                 |                                                                                                                               |                               |                              |
+| [\_\_construct](#spaceonfire_apidoc_element_functionsaggregate_construct) |                                                                                                                               |                               | [📢](# "Visibility: public") |
+| [getFqsen](#spaceonfire_apidoc_element_functionsaggregate_getfqsen)       | _spaceonfire\ApiDoc\Element\ValueObject\Fqsen_                                                                                | Getter for `fqsen` property.  | [📢](# "Visibility: public") |
+| [getIterator](#spaceonfire_apidoc_element_functionsaggregate_getiterator) | _ArrayIterator<int&#124;string,spaceonfire\ApiDoc\Element\FunctionElement>&#124;spaceonfire\ApiDoc\Element\FunctionElement[]_ | Retrieve an external iterator | [📢](# "Visibility: public") |
+| [count](#spaceonfire_apidoc_element_functionsaggregate_count)             | _int_                                                                                                                         | Count elements of an object   | [📢](# "Visibility: public") |
+
+## Methods
+
+<a name="spaceonfire_apidoc_element_functionsaggregate_construct"></a>
+
+### \_\_construct()
+
+-   **Visibility**: public
+
+| Param                  | Type                                         | Reference | Description |
+| ---------------------- | -------------------------------------------- | --------- | ----------- |
+| `...$functionElements` | _spaceonfire\ApiDoc\Element\FunctionElement_ | No        |             |
+
+```php
+public function __construct(spaceonfire\ApiDoc\Element\FunctionElement ...$functionElements)
+```
+
+File location: `Element/FunctionsAggregate.php:25`
+
+<a name="spaceonfire_apidoc_element_functionsaggregate_getfqsen"></a>
+
+### getFqsen()
+
+Getter for `fqsen` property.
+
+-   **Visibility**: public
+
+| Param      | Type                                           | Reference | Description |
+| ---------- | ---------------------------------------------- | --------- | ----------- |
+| **Return** | _spaceonfire\ApiDoc\Element\ValueObject\Fqsen_ |           |             |
+
+```php
+public function getFqsen(): spaceonfire\ApiDoc\Element\ValueObject\Fqsen
+```
+
+File location: `Element/FunctionsAggregate.php:35`
+
+<a name="spaceonfire_apidoc_element_functionsaggregate_getiterator"></a>
+
+### getIterator()
+
+Retrieve an external iterator
+
+-   **Visibility**: public
+
+| Param      | Type                                                                                                                          | Reference | Description |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ----------- |
+| **Return** | _ArrayIterator<int&#124;string,spaceonfire\ApiDoc\Element\FunctionElement>&#124;spaceonfire\ApiDoc\Element\FunctionElement[]_ |           |             |
+| **Throws** | _Exception_                                                                                                                   |           | on failure. |
+
+```php
+public function getIterator(): ArrayIterator<int|string,spaceonfire\ApiDoc\Element\FunctionElement>|spaceonfire\ApiDoc\Element\FunctionElement[]
+```
+
+File location: `Element/FunctionsAggregate.php:44`
+
+<a name="spaceonfire_apidoc_element_functionsaggregate_count"></a>
+
+### count()
+
+Count elements of an object
+
+-   **Visibility**: public
+
+| Param      | Type  | Reference | Description                                                                               |
+| ---------- | ----- | --------- | ----------------------------------------------------------------------------------------- |
+| **Return** | _int_ |           | The custom count as an integer.<br></p><br><p><br>The return value is cast to an integer. |
+
+```php
+public function count(): int
+```
+
+File location: `Element/FunctionsAggregate.php:52`
+
+---
+
+This file automatically generated by [SpaceOnFire ApiDoc](https://github.com/spaceonfire/apidoc)

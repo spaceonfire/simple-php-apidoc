@@ -1,0 +1,17 @@
+{
+  "alias": "apidoc.phar",
+  "output": "build/box/apidoc.phar",
+  "force-autodiscovery": true,
+  "directories-bin": [
+    "resources"
+  ],
+  "directories": [
+    "vendor/twig/twig/src/Node/Expression/Test"
+  ],
+  "files": [
+    "vendor/twig/twig/src/TwigTest.php"
+  ],
+  "compactors": [
+    "KevinGH\\Box\\Compactor\\PhpScoper"
+  ]
+}
