@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2|^8.0",
     "ext-json": "*",
     "composer/semver": "^3.2",
     "guzzlehttp/psr7": "^1.6.1",
@@ -74,7 +74,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-development": "2.0-dev"
+      "dev-stable": "2.0-dev"
     }
   },
   "config": {

@@ -100,13 +100,13 @@ jobs:
           apk update
           docker-php-ext-enable xdebug
           vendor/bin/phpunit --no-interaction
-          cat build/coverage.txt
+          cat build/phpunit/coverage.txt
 
       - name: PHPUnit Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: phpunit-${{ matrix.php-version }}
-          path: build/
+          path: build/phpunit/
 
       - name: Generate coverage badge
         if: matrix.php-version == '7.2' && github.event_name == 'push' && github.ref == 'refs/heads/master'

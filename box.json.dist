@@ -1,9 +1,11 @@
 {
   "alias": "apidoc.phar",
+  "output": "build/box/apidoc.phar",
   "force-autodiscovery": true,
-  "dump-autoload": true,
+  "directories-bin": [
+    "resources"
+  ],
   "directories": [
-    "resources",
     "vendor/twig/twig/src/Node/Expression/Test"
   ],
   "files": [

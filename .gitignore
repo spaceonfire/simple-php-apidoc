@@ -40,7 +40,8 @@ nbproject
 !.env.example
 
 # Project folders and files to ignore
-build
+build/phpunit
+build/box/apidoc.phar
 vendor
 .phpunit.result.cache
 phpunit.xml
@@ -48,4 +49,4 @@ phpstan.neon
 docker-compose.override.yml
 box.phar
 box.json
-php-scoper.phar
+!composer.lock

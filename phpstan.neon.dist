@@ -1,39 +1,38 @@
 # Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
 
 includes:
-	- phar://phpstan.phar/conf/bleedingEdge.neon
-	- %rootDir%/../phpstan-webmozart-assert/extension.neon
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - %rootDir%/../phpstan-webmozart-assert/extension.neon
 parameters:
-	level: max
-	inferPrivatePropertyTypeFromConstructor: true
-	paths:
-		- src/
-	bootstrapFiles:
-		- vendor/autoload.php
-	ignoreErrors:
-		- '/^Property spaceonfire\\ApiDoc\\Render\\Twig\\DumpExtension::\$dumper \(Symfony\\Component\\VarDumper\\Dumper\\AbstractDumper\) does not accept Symfony\\Component\\VarDumper\\Dumper\\DataDumperInterface\.$/'
+    level: max
+    inferPrivatePropertyTypeFromConstructor: true
+    paths:
+        - src/
+    bootstrapFiles:
+        - vendor/autoload.php
+    ignoreErrors:
+        - '/^Property spaceonfire\\ApiDoc\\Render\\Twig\\DumpExtension::\$dumper \(Symfony\\Component\\VarDumper\\Dumper\\AbstractDumper\) does not accept Symfony\\Component\\VarDumper\\Dumper\\DataDumperInterface\.$/'
 
-		-
-			message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$static.$/'
-			path: 'src/Element/Factory/FunctionLikeElementFactory.php'
-		-
-			message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$abstract.$/'
-			path: 'src/Element/Factory/FunctionLikeElementFactory.php'
-		-
-			message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$final.$/'
-			path: 'src/Element/Factory/FunctionLikeElementFactory.php'
-		-
-			message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$visibility.$/'
-			path: 'src/Element/Factory/FunctionLikeElementFactory.php'
+        -
+            message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$static.$/'
+            path: 'src/Element/Factory/FunctionLikeElementFactory.php'
+        -
+            message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$abstract.$/'
+            path: 'src/Element/Factory/FunctionLikeElementFactory.php'
+        -
+            message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$final.$/'
+            path: 'src/Element/Factory/FunctionLikeElementFactory.php'
+        -
+            message: '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\FunctionElement\|spaceonfire\\ApiDoc\\Element\\MethodElement::\$visibility.$/'
+            path: 'src/Element/Factory/FunctionLikeElementFactory.php'
 
-		# Generics errors
-		- '/^Generator expects value type spaceonfire\\ApiDoc\\Element\\FunctionElement, spaceonfire\\ApiDoc\\Element\\ElementInterface given\.$/'
-		- '/^Generator expects value type spaceonfire\\ApiDoc\\Element\\ConstantElement, spaceonfire\\ApiDoc\\Element\\ElementInterface given\.$/'
-		- '/^Property(.*)SplObjectStorage(.*)does not accept SplObjectStorage(.*)$/'
-		- '/^Cannot call method merge\(\) on(.*)spaceonfire\\Collection\\CollectionInterface(.*)$/'
-		- '/^Parameter #1 ...\$tags of method spaceonfire\\ApiDoc\\Element\\DocBlock\\Resolver\\DocBlockMerger::indexParamTags\(\) expects phpDocumentor\\Reflection\\DocBlock\\Tags\\Param, phpDocumentor\\Reflection\\DocBlock\\Tag given\.$/'
-		- '/^Parameter #1 ...\$tags of method spaceonfire\\ApiDoc\\Element\\DocBlock\\Resolver\\DocBlockMerger::indexMethodTags\(\) expects phpDocumentor\\Reflection\\DocBlock\\Tags\\Method, phpDocumentor\\Reflection\\DocBlock\\Tag given\.$/'
-		- '/^Parameter #1 ...\$tags of method spaceonfire\\ApiDoc\\Element\\DocBlock\\Resolver\\DocBlockMerger::indexPropertyTags\(\) expects phpDocumentor\\Reflection\\DocBlock\\Tags\\Property(.*), phpDocumentor\\Reflection\\DocBlock\\Tag given\.$/'
+        # Generics errors
+        - '/^Generator expects value type spaceonfire\\ApiDoc\\Element\\FunctionElement, spaceonfire\\ApiDoc\\Element\\ElementInterface given\.$/'
+        - '/^Generator expects value type spaceonfire\\ApiDoc\\Element\\ConstantElement, spaceonfire\\ApiDoc\\Element\\ElementInterface given\.$/'
+        - '/^Property(.*)SplObjectStorage(.*)does not accept SplObjectStorage(.*)$/'
+        - '/^Cannot call method merge\(\) on(.*)spaceonfire\\Collection\\CollectionInterface(.*)$/'
+        - '/^Parameter #1 ...\$tags of method spaceonfire\\ApiDoc\\Element\\DocBlock\\Resolver\\DocBlockMerger::indexParamTags\(\) expects phpDocumentor\\Reflection\\DocBlock\\Tags\\Param, phpDocumentor\\Reflection\\DocBlock\\Tag given\.$/'
+        - '/^Parameter #1 ...\$tags of method spaceonfire\\ApiDoc\\Element\\DocBlock\\Resolver\\DocBlockMerger::indexMethodTags\(\) expects phpDocumentor\\Reflection\\DocBlock\\Tags\\Method, phpDocumentor\\Reflection\\DocBlock\\Tag given\.$/'
+        - '/^Parameter #1 ...\$tags of method spaceonfire\\ApiDoc\\Element\\DocBlock\\Resolver\\DocBlockMerger::indexPropertyTags\(\) expects phpDocumentor\\Reflection\\DocBlock\\Tags\\Property(.*), phpDocumentor\\Reflection\\DocBlock\\Tag given\.$/'
 
-		- '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\ElementInterface::\$name\.$/'
-
+        - '/^Access to an undefined property spaceonfire\\ApiDoc\\Element\\ElementInterface::\$name\.$/'

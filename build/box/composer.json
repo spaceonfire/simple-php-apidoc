@@ -1,0 +1,32 @@
+{
+  "name": "spaceonfire/apidoc",
+  "type": "library",
+  "description": "Simple API documentation generator for your PHP library",
+  "keywords": [
+    "phpdoc",
+    "apidoc",
+    "markdown"
+  ],
+  "homepage": "https://github.com/spaceonfire/apidoc",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2|^8.0",
+    "ext-json": "*"
+  },
+  "bin": [
+    "apidoc.phar"
+  ],
+  "extra": {
+    "branch-alias": {
+      "dev-stable": "2.0-dev"
+    }
+  }
+}
